@@ -100,7 +100,7 @@ public class FileManager {
 				Files.createDirectories(PATHADMINSTRATOR);
 
 			} catch (IOException e1) {
-			//if there are any problems, print out an 
+			//if there are any problems, print out an error message!
 				e1.printStackTrace();
 			}
 		}

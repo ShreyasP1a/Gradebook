@@ -54,7 +54,7 @@ public class Main extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			
-				new FileManager("Student");
+				new FileManager();
 			
 			}
 		});

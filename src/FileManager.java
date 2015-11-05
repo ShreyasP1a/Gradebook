@@ -39,7 +39,7 @@ public class FileManager {
 	
 	private static final Path PATHADMINSTRATOR = Paths.get(APPDATAPATH + ADMINSTRATORADDRESS);
 
-	String person = ""; // this string is to contain which person clicked the
+	 // this string is to contain which person clicked the
 						// button wheather it be student, adminstrator, or
 						// teacher
 	
@@ -49,9 +49,9 @@ public class FileManager {
 	private static final String TEACHER = "TEACHER";
 	
 
-	public FileManager(String person) {
+	public FileManager() {
 
-		person = person; // intializing the person string
+		 // intializing the person string
 
 		createAppDataFolder(); // use the method createAppDataFolder to create
 								// the Folders in %appdata%
@@ -61,8 +61,6 @@ public class FileManager {
 	 * This method is used to get the path of the folder for either student,
 	 * teacher, admin. The Parameters are a person, so the method can
 	 * differentiate between all three and give the correct path in gradebook
-	 * 
-	 * This method is still not done
 	 * --------------------------------------------
 	 */
 	public Path getPath(String person) {
@@ -105,5 +103,25 @@ public class FileManager {
 			}
 		}
 
+	}
+	/*
+	 * This method will first check to see if an account is already created in a file 
+	 */
+	public void addUserNameAndPasswordToDataBase(String Username, String Password) {
+		
+	}
+		
+	
+	public void createAccountForPerson(String person) {
+	
+		
+		
+		
+	}
+	private String encryptPassword(String password) {
+			
+		
+		
+		return "";
 	}
 }

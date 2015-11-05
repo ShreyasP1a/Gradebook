@@ -5,63 +5,102 @@ import java.nio.file.Paths;
 
 public class FileManager {
 	/*
-	 * Programmer: Shreyas Patil
-	 * Latest worked on date: 11/04/15
-	 * The Main Purpose of this class is to facilitate the use of files throughout out the program
-	 * If another class has to use some type of file it has to come through here and cannot open the files in their actual classes
+	 * Programmer: Shreyas Patil 
+	 * Latest worked on date: 11/04/15 
+	 * The Main Purpose of this class is to facilitate the use of files throughout out
+	 * the program If another class has to use some type of file it has to come
+	 * through here and cannot open the files in their actual classes
 	 */
-	
-	
-//This is just setting up all of the Paths and where everything is located	
-	
-	private static String appData = System.getenv("APPDATA");		//get the path to where the %Appdata% is stored!
 
-	private static final String NEWAPPDATA = appData.replace("\\", "/"); //replace all of the \ with / because it doesn't work I have no clue why lol
+	// This is just setting up all of the Paths and where everything is located
 
-	private final static String FOLDERNAME = "/GradeBook"; //create the folder name where all of the files are going to be located
+	private static String appData = System.getenv("APPDATA");
+
+	private static final String NEWAPPDATA = appData.replace("\\", "/"); 
 	
-	private static String OS = System.getProperty("os.name").toUpperCase(); //This string contains what operating system you are on, and makes it all Upper Case: WINDOWS 7, WINDOWS 8.1, WINDOWS 10, OR MAC OSX
-	
-	private static Path APPDATAPATH = Paths.get(NEWAPPDATA + FOLDERNAME);	//This path contains where the the 
-	
-	private static final String TEACHERADDRESS = "/TEACHER";
-	
+	private final static String FOLDERNAME = "/GradeBook";
+
+	private static String OS = System.getProperty("os.name").toUpperCase(); 
+
+	private static Path APPDATAPATH = Paths.get(NEWAPPDATA + FOLDERNAME); 
+
+	private static final String TEACHERADDRESS = "/TEACHER"; 
+
 	private static final String STUDENTADDRESS = "/STUDENT";
-	
-	private static final String ADMINSTRATORADDRESS = "/ADMINSTRATOR";
 
+	private static final String ADMINSTRATORADDRESS = "/ADMINSTRATOR"; 
 	
-	String person = "";
+	// Create the paths for all of the folders in the
+	// %Appdata%/Gradebook	
+	
+	private static final Path PATHSTUDENT = Paths.get(APPDATAPATH + STUDENTADDRESS);
+
+	private static final Path PATHTEACHER = Paths.get(APPDATAPATH + TEACHERADDRESS);
+	
+	private static final Path PATHADMINSTRATOR = Paths.get(APPDATAPATH + ADMINSTRATORADDRESS);
+
+	String person = ""; // this string is to contain which person clicked the
+						// button wheather it be student, adminstrator, or
+						// teacher
+	
+	
+	private static final String STUDENT = "STUDENT";
+	private static final String ADMIN = "ADMINSTRATOR";
+	private static final String TEACHER = "TEACHER";
+	
+
 	public FileManager(String person) {
-		person = person;
-		createAppDataFolder();
+
+		person = person; // intializing the person string
+
+		createAppDataFolder(); // use the method createAppDataFolder to create
+								// the Folders in %appdata%
 	}
 
+	/*
+	 * This method is used to get the path of the folder for either student,
+	 * teacher, admin. The Parameters are a person, so the method can
+	 * differentiate between all three and give the correct path in gradebook
+	 * 
+	 * This method is still not done
+	 * --------------------------------------------
+	 */
 	public Path getPath(String person) {
-
-		return null;
+		
+		
+		if(person.equalsIgnoreCase(STUDENT)) { //if person is student return path of student
+			return PATHSTUDENT;
+		} else if (person.equalsIgnoreCase(TEACHER)){ //if person is teacher return path of teacher
+			return PATHTEACHER;
+		} else { //if person is admin return path of admin
+			return PATHADMINSTRATOR;
+		}
 
 	}
+	/*
+	 * The purpose of this method is the create the gradebook folder along with
+	 * the folders: teacher, student, and admin This method will only run if
+	 * gradebook is not there.
+	 */
 
 	private void createAppDataFolder() {
-
+		// Checking if the gradebook is there,
+		// if it is not there then create it and create all of the necessary
+		// folders inside.
 		if (!Files.isDirectory(APPDATAPATH)) {
+
 			try {
-				
-			//Create the paths for all of the folders in the %Appdata%
-				
-				Path pathStudent = Paths.get(APPDATAPATH + STUDENTADDRESS);
-				Path pathTeacher = Paths.get(APPDATAPATH + TEACHERADDRESS);
-				Path pathAdminstrator = Paths.get(APPDATAPATH + ADMINSTRATORADDRESS);
-			//Create the folders in the %appdata%						
+
+							
+				// Create the folders in the %appdata%
+			
 				Files.createDirectories((APPDATAPATH));
-				Files.createDirectories(pathStudent);
-				Files.createDirectories(pathTeacher);
-				Files.createDirectories(pathAdminstrator);
-				
+				Files.createDirectories(PATHSTUDENT);
+				Files.createDirectories(PATHTEACHER);
+				Files.createDirectories(PATHADMINSTRATOR);
 
 			} catch (IOException e1) {
-
+			//if there are any problems, print out an 
 				e1.printStackTrace();
 			}
 		}

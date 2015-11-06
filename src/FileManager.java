@@ -1,4 +1,7 @@
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -105,10 +108,15 @@ public class FileManager {
 
 	}
 	/*
-	 * This method will first check to see if an account is already created in a file 
+	 * This method will first check to see if an account is already created in a file and if it is not it will add it to the database with the password
+	 * encrypted using an md5 hashing method. 
 	 */
 	public void addUserNameAndPasswordToDataBase(String Username, String Password) {
+					
 		
+		
+			
+	
 	}
 		
 	
@@ -124,4 +132,21 @@ public class FileManager {
 		
 		return "";
 	}
+	
+	private void writeToFile(String user, String md5) {
+		PrintWriter writer;
+		try {
+			writer = new PrintWriter("the-file-name.txt", "UTF-8");
+			writer.close();	
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 }

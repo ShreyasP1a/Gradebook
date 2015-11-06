@@ -134,18 +134,7 @@ public class FileManager {
 	}
 	
 	private void writeToFile(String user, String md5) {
-		PrintWriter writer;
-		try {
-			writer = new PrintWriter("the-file-name.txt", "UTF-8");
-			writer.close();	
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		System.out.println("Here");
 		
 	}
 	

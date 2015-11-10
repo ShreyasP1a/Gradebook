@@ -132,7 +132,10 @@ public class FileManager {
 	}
 	
 	private void writeToFile(String user, String md5) {
-				
+
+		
+		
+
 	}
 	
 }

@@ -118,12 +118,7 @@ public class FileManager {
 	}
 		
 	
-	public void createAccountForPerson(String person) {
 	
-		
-		
-		
-	}
 	private String encryptPassword(String password) {
 			
 

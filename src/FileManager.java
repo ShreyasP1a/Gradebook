@@ -1,10 +1,8 @@
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.MessageDigest;
 
 public class FileManager {
 	/*
@@ -128,25 +126,13 @@ public class FileManager {
 	}
 	private String encryptPassword(String password) {
 			
-		
+
 		
 		return "";
 	}
 	
 	private void writeToFile(String user, String md5) {
-		PrintWriter writer;
-		try {
-			writer = new PrintWriter("the-file-name.txt", "UTF-8");
-			writer.close();	
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+				
 	}
 	
 }

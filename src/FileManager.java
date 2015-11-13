@@ -1,10 +1,8 @@
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.MessageDigest;
 
 public class FileManager {
 	/*
@@ -19,28 +17,41 @@ public class FileManager {
 
 	private static String appData = System.getenv("APPDATA");
 
-	private static final String NEWAPPDATA = appData.replace("\\", "/"); 
+	private static final String NEW_APP_DATA = appData.replace("\\", "/"); 
 	
-	private final static String FOLDERNAME = "/GradeBook";
+	private final static String FOLDER_NAME = "/GradeBook";
 
 	private static String OS = System.getProperty("os.name").toUpperCase(); 
 
-	private static Path APPDATAPATH = Paths.get(NEWAPPDATA + FOLDERNAME); 
+	private static final Path APP_DATA_PATH = Paths.get(NEW_APP_DATA + FOLDER_NAME); 
 
-	private static final String TEACHERADDRESS = "/TEACHER"; 
+	private static final String TEACHER_ADDRESS = "/TEACHER"; 
 
-	private static final String STUDENTADDRESS = "/STUDENT";
+	private static final String STUDENT_ADDRESS = "/STUDENT";
 
-	private static final String ADMINSTRATORADDRESS = "/ADMINSTRATOR"; 
+	private static final String ADMINSTRATOR_ADDRESS = "/ADMINSTRATOR"; 
+	
+	
 	
 	// Create the paths for all of the folders in the
 	// %Appdata%/Gradebook	
 	
-	private static final Path PATHSTUDENT = Paths.get(APPDATAPATH + STUDENTADDRESS);
+	private static final Path PATH_STUDENT = Paths.get(APP_DATA_PATH + STUDENT_ADDRESS);
 
-	private static final Path PATHTEACHER = Paths.get(APPDATAPATH + TEACHERADDRESS);
+	private static final Path PATH_TEACHER = Paths.get(APP_DATA_PATH + TEACHER_ADDRESS);
 	
-	private static final Path PATHADMINSTRATOR = Paths.get(APPDATAPATH + ADMINSTRATORADDRESS);
+	private static final Path PATH_ADMINSTRATOR = Paths.get(APP_DATA_PATH + ADMINSTRATOR_ADDRESS);
+	
+	//Paths for where all of the people passwords are stored.
+	//There are stored in a txt file. if a student creates a account then his password and user is stored in the database in the folder that contains the name student
+	//This code will contain where all of the Password database files are stored for student, teacher, and adminstrator.
+	
+	private static final Path PATH_STUDENT_PASSWORD = Paths.get(APP_DATA_PATH + STUDENT_ADDRESS + "/StudentPassword.txt");
+
+	private static final Path PATH_TEACHER_PASSWORD = Paths.get(APP_DATA_PATH + TEACHER_ADDRESS + "/TeacherPassword.txt");
+	
+	private static final Path PATH_ADMINSTRATOR_PASSWORD = Paths.get(APP_DATA_PATH + ADMINSTRATOR_ADDRESS + "/AdminstratorPassword.txt");
+	
 
 	 // this string is to contain which person clicked the
 						// button wheather it be student, adminstrator, or
@@ -56,7 +67,7 @@ public class FileManager {
 
 		 // intializing the person string
 
-		createAppDataFolder(); // use the method createAppDataFolder to create
+		 // use the method createAppDataFolder to create
 								// the Folders in %appdata%
 	}
 
@@ -70,11 +81,11 @@ public class FileManager {
 		
 		
 		if(person.equalsIgnoreCase(STUDENT)) { //if person is student return path of student
-			return PATHSTUDENT;
+			return PATH_STUDENT;
 		} else if (person.equalsIgnoreCase(TEACHER)){ //if person is teacher return path of teacher
-			return PATHTEACHER;
+			return PATH_TEACHER;
 		} else { //if person is admin return path of admin
-			return PATHADMINSTRATOR;
+			return PATH_ADMINSTRATOR;
 		}
 
 	}
@@ -84,22 +95,27 @@ public class FileManager {
 	 * gradebook is not there.
 	 */
 
-	private void createAppDataFolder() {
+	public void preInit() {
 		// Checking if the gradebook is there,
 		// if it is not there then create it and create all of the necessary
 		// folders inside.
-		if (!Files.isDirectory(APPDATAPATH)) {
+		if (!Files.isDirectory(APP_DATA_PATH)) {
 
 			try {
 
 							
 				// Create the folders in the %appdata%
 			
-				Files.createDirectories((APPDATAPATH));
-				Files.createDirectories(PATHSTUDENT);
-				Files.createDirectories(PATHTEACHER);
-				Files.createDirectories(PATHADMINSTRATOR);
-
+				Files.createDirectories((APP_DATA_PATH));
+				Files.createDirectories(PATH_STUDENT);
+				Files.createDirectories(PATH_TEACHER);
+				Files.createDirectories(PATH_ADMINSTRATOR);
+				
+				//create the Files for the password databases
+				PATH_STUDENT_PASSWORD.toFile().createNewFile();
+				PATH_TEACHER_PASSWORD.toFile().createNewFile();
+				PATH_ADMINSTRATOR_PASSWORD.toFile().createNewFile();
+				
 			} catch (IOException e1) {
 			//if there are any problems, print out an error message!
 				e1.printStackTrace();
@@ -111,31 +127,26 @@ public class FileManager {
 	 * This method will first check to see if an account is already created in a file and if it is not it will add it to the database with the password
 	 * encrypted using an md5 hashing method. 
 	 */
-	public void addUserNameAndPasswordToDataBase(String Username, String Password) {
+	public void addUserNameAndPasswordToDataBase(String Username, String Password) 
+	{
 					
 		
 		
 			
 	
 	}
-		
-	
-	public void createAccountForPerson(String person) {
-	
-		
-		
-		
-	}
 	private String encryptPassword(String password) {
 			
-		
+
 		
 		return "";
 	}
 	
 	private void writeToFile(String user, String md5) {
-		System.out.println("Here");
+
 		
+		
+
 	}
 	
 }

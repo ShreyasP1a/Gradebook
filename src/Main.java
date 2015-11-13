@@ -25,6 +25,8 @@ public class Main extends JFrame {
 				try {
 					Main frame = new Main();
 					frame.setVisible(true);
+					FileManager file = new FileManager();
+					file.preInit();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -9,6 +9,9 @@ public class AccountManager {
 		
 		
 	}
+	public void returnAccountStatus(){
+		
+	}
 	
 
 }

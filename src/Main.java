@@ -27,6 +27,8 @@ public class Main extends JFrame {
 					frame.setVisible(true);
 					FileManager file = new FileManager();
 					file.preInit();
+					
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -45,6 +47,7 @@ public class Main extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setLocationRelativeTo(null);
 		
 		JLabel lblGradebook = new JLabel("Gradebook");
 		lblGradebook.setFont(new Font("Arial Black", Font.BOLD, 20));
@@ -57,6 +60,7 @@ public class Main extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			
 				new FileManager();
+				
 			
 			}
 		});
@@ -72,6 +76,13 @@ public class Main extends JFrame {
 		contentPane.add(btnAdminstrator);
 		
 		JButton btnCreateAccount = new JButton("Create Account");
+		btnCreateAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AccountCreationFrame frame =  new AccountCreationFrame();
+				frame.setVisible(true);
+				 
+			}
+		});
 		btnCreateAccount.setBounds(128, 330, 207, 23);
 		contentPane.add(btnCreateAccount);
 	}

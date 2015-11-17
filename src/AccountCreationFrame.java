@@ -22,7 +22,7 @@ public class AccountCreationFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public AccountCreationFrame() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setBounds(100, 100, 410, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

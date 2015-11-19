@@ -111,7 +111,7 @@ public class FileManager {
 				Files.createDirectories(PATH_TEACHER);
 				Files.createDirectories(PATH_ADMINSTRATOR);
 				
-				//create the Files for the password databases
+				//create the Files for the password/user databases
 				PATH_STUDENT_PASSWORD.toFile().createNewFile();
 				PATH_TEACHER_PASSWORD.toFile().createNewFile();
 				PATH_ADMINSTRATOR_PASSWORD.toFile().createNewFile();
@@ -125,7 +125,7 @@ public class FileManager {
 	}
 	/*
 	 * This method will first check to see if an account is already created in a file and if it is not it will add it to the database with the password
-	 * encrypted using an md5 hashing method. 
+	 * encrypted using an md5 hashing method. ----- dont really know how to do this will work on it later lol lol lol hahaha
 	 */
 	public void addUserNameAndPasswordToDataBase(String Username, String Password) 
 	{
@@ -137,7 +137,7 @@ public class FileManager {
 	}
 	private String encryptPassword(String password) {
 			
-
+	
 		
 		return "";
 	}

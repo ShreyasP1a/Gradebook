@@ -5,11 +5,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AccountCreationFrame extends JFrame {
 
@@ -29,7 +32,9 @@ public class AccountCreationFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setLocationRelativeTo(null);
-
+		setVisible(true);
+		
+		
 		JLabel lblAccountCreation = new JLabel("Account Creation");
 		lblAccountCreation.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		lblAccountCreation.setHorizontalAlignment(SwingConstants.CENTER);
@@ -37,7 +42,6 @@ public class AccountCreationFrame extends JFrame {
 		contentPane.add(lblAccountCreation);
 
 		pwdEnterPassword = new JPasswordField();
-		pwdEnterPassword.setToolTipText("In your password please have numbers and symbols in it thank you");
 		pwdEnterPassword.setBounds(155, 184, 194, 20);
 		pwdEnterPassword.getDocument().addDocumentListener(null);
 		contentPane.add(pwdEnterPassword);
@@ -74,6 +78,27 @@ public class AccountCreationFrame extends JFrame {
 		contentPane.add(lblReenterPassword);
 
 		JButton btnEnter = new JButton("Create");
+		btnEnter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String userName = txtUserName.getText();
+				String password = pwdEnterPassword.getText();
+				String checkPassword = pwdReenterPassword.getText();
+				
+				if(!password.equals(checkPassword)) {
+					JOptionPane.showMessageDialog(null, "Please make sure that the passwords match");
+					pwdEnterPassword.setText("");
+					pwdReenterPassword.setText("");
+					
+				} else {
+					//do stuff
+					dispose();
+				}
+				
+			
+			
+			}
+		});
+		
 		btnEnter.setBounds(155, 328, 89, 23);
 		contentPane.add(btnEnter);
 	}

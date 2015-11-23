@@ -78,8 +78,8 @@ public class Main extends JFrame {
 		JButton btnCreateAccount = new JButton("Create Account");
 		btnCreateAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				AccountCreationFrame frame =  new AccountCreationFrame();
-				frame.setVisible(true);
+				new AccountCreationFrame();
+				
 				 
 			}
 		});

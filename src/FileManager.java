@@ -7,7 +7,7 @@ import java.security.MessageDigest;
 public class FileManager {
 	/*
 	 * Programmer: Shreyas Patil 
-	 * Latest worked on date: 11/04/15 
+	 * Latest worked on date: 11/26/15 
 	 * The Main Purpose of this class is to facilitate the use of files throughout out
 	 * the program If another class has to use some type of file it has to come
 	 * through here and cannot open the files in their actual classes
@@ -99,33 +99,49 @@ public class FileManager {
 		// Checking if the gradebook is there,
 		// if it is not there then create it and create all of the necessary
 		// folders inside.
+
+		System.out.println("Pre Initiialization Check .....");
 		if (!Files.isDirectory(APP_DATA_PATH)) {
 
 			try {
 
 							
 				// Create the folders in the %appdata%
+				
+				System.out.println("Folders not created in the %Appdata% ....");
+				
 			
 				Files.createDirectories((APP_DATA_PATH));
 				Files.createDirectories(PATH_STUDENT);
 				Files.createDirectories(PATH_TEACHER);
 				Files.createDirectories(PATH_ADMINSTRATOR);
 				
+				System.out.println("Folders Created");
+				
+				System.out.println();
+				System.out.println("Creating pasword databases for student, teacher and admin");
+				
 				//create the Files for the password/user databases
 				PATH_STUDENT_PASSWORD.toFile().createNewFile();
 				PATH_TEACHER_PASSWORD.toFile().createNewFile();
 				PATH_ADMINSTRATOR_PASSWORD.toFile().createNewFile();
+				
+				System.out.println("Database created!");
 				
 			} catch (IOException e1) {
 			//if there are any problems, print out an error message!
 				e1.printStackTrace();
 			}
 		}
+		
+		System.out.println("Pre init check done all up to date!");
 
 	}
 	/*
 	 * This method will first check to see if an account is already created in a file and if it is not it will add it to the database with the password
 	 * encrypted using an md5 hashing method. ----- dont really know how to do this will work on it later lol lol lol hahaha
+	 * I dont know why I did the lol part hahaha!
+	 * oh my!
 	 */
 	public void addUserNameAndPasswordToDataBase(String Username, String Password) 
 	{
@@ -143,7 +159,7 @@ public class FileManager {
 	}
 	
 	private void writeToFile(String user, String md5) {
-
+		//test what to do ?
 		
 		
 

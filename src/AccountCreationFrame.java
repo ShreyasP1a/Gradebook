@@ -1,18 +1,18 @@
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.SwingConstants;
-import java.awt.Font;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 public class AccountCreationFrame extends JFrame {
 
@@ -26,7 +26,7 @@ public class AccountCreationFrame extends JFrame {
 	 */
 	public AccountCreationFrame() {
 		
-		setBounds(100, 100, 410, 400);
+		setBounds(100, 100, 531, 427);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -76,6 +76,28 @@ public class AccountCreationFrame extends JFrame {
 		lblReenterPassword.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblReenterPassword.setBounds(10, 247, 120, 20);
 		contentPane.add(lblReenterPassword);
+		
+		JRadioButton studentRadioButton = new JRadioButton("Student");
+		studentRadioButton.setBounds(377, 118, 109, 23);
+		contentPane.add(studentRadioButton);
+		
+		JRadioButton teacherRadioButton = new JRadioButton("Teacher");
+		teacherRadioButton.setBounds(377, 181, 109, 23);
+		contentPane.add(teacherRadioButton);
+		
+		JRadioButton adminRadioButton = new JRadioButton("Adminstrator");
+		adminRadioButton.setBounds(377, 244, 109, 23);
+		contentPane.add(adminRadioButton);
+		
+		
+		
+		ButtonGroup personButtonGroup = new ButtonGroup( );
+		
+		personButtonGroup.add(studentRadioButton);
+		personButtonGroup.add(teacherRadioButton);
+		personButtonGroup.add(adminRadioButton);
+		
+		
 
 		JButton btnEnter = new JButton("Create");
 		btnEnter.addActionListener(new ActionListener() {
@@ -84,15 +106,49 @@ public class AccountCreationFrame extends JFrame {
 				String password = pwdEnterPassword.getText();
 				String checkPassword = pwdReenterPassword.getText();
 				
+		//Check if any of the Radio buttons are selected do the password check and then create the account if 
+		//the radio buttons are not selected then display a message to select one
+			if(studentRadioButton.isSelected() || teacherRadioButton.isSelected() || adminRadioButton.isSelected() ) {				
+				
+			//Check if the passwords match if not then display a correction message
+			//If the passwords match then send the account info to the account manager and then dispose the frame, and display a message
 				if(!password.equals(checkPassword)) {
 					JOptionPane.showMessageDialog(null, "Please make sure that the passwords match");
 					pwdEnterPassword.setText("");
 					pwdReenterPassword.setText("");
 					
 				} else {
-					//do stuff
+					//send info to Account manager
+					System.out.println("Sending info to account manger");
+						
+					AccountManager manager = new AccountManager();
+					
+					String person = "";
+					String name = txtUserName.getText();
+					String Password = pwdEnterPassword.getText();
+					
+					if(studentRadioButton.isSelected()) {
+						person = "student";
+					} else if(teacherRadioButton.isSelected()){
+						person = "teacher";
+					} else {
+						person = "admin";
+					}
+					
+					manager.createAccountForPerson(person, name, Password);
+					
+					//kill the account creation frame and go back to the main menu
 					dispose();
+					
+					//display message
+					JOptionPane.showMessageDialog(null, "Account Created!");
 				}
+			} else {
+				//Display "select a option teacher, student, or admin
+				
+				JOptionPane.showMessageDialog(null, "Please select which account you are creating");
+				
+			}
 				
 			
 			
@@ -101,5 +157,7 @@ public class AccountCreationFrame extends JFrame {
 		
 		btnEnter.setBounds(155, 328, 89, 23);
 		contentPane.add(btnEnter);
+		
+		
 	}
 }

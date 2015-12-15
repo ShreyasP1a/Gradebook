@@ -1,13 +1,17 @@
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.security.MessageDigest;
 
 public class FileManager {
 	/*
 	 * Programmer: Shreyas Patil 
-	 * Latest worked on date: 11/04/15 
+	 * Latest worked on date: 11/26/15 
 	 * The Main Purpose of this class is to facilitate the use of files throughout out
 	 * the program If another class has to use some type of file it has to come
 	 * through here and cannot open the files in their actual classes
@@ -46,11 +50,11 @@ public class FileManager {
 	//There are stored in a txt file. if a student creates a account then his password and user is stored in the database in the folder that contains the name student
 	//This code will contain where all of the Password database files are stored for student, teacher, and adminstrator.
 	
-	private static final Path PATH_STUDENT_PASSWORD = Paths.get(APP_DATA_PATH + STUDENT_ADDRESS + "/StudentPassword.txt");
+	private static final Path PATH_STUDENT_PASSWORD_TXT = Paths.get(APP_DATA_PATH + STUDENT_ADDRESS + "/StudentPassword.txt");
 
-	private static final Path PATH_TEACHER_PASSWORD = Paths.get(APP_DATA_PATH + TEACHER_ADDRESS + "/TeacherPassword.txt");
+	private static final Path PATH_TEACHER_PASSWORD_TXT = Paths.get(APP_DATA_PATH + TEACHER_ADDRESS + "/TeacherPassword.txt");
 	
-	private static final Path PATH_ADMINSTRATOR_PASSWORD = Paths.get(APP_DATA_PATH + ADMINSTRATOR_ADDRESS + "/AdminstratorPassword.txt");
+	private static final Path PATH_ADMINSTRATOR_PASSWORD_TXT = Paths.get(APP_DATA_PATH + ADMINSTRATOR_ADDRESS + "/AdminstratorPassword.txt");
 	
 
 	 // this string is to contain which person clicked the
@@ -99,54 +103,118 @@ public class FileManager {
 		// Checking if the gradebook is there,
 		// if it is not there then create it and create all of the necessary
 		// folders inside.
+
+		System.out.println("Pre Initiialization Check .....");
 		if (!Files.isDirectory(APP_DATA_PATH)) {
 
 			try {
 
 							
 				// Create the folders in the %appdata%
+				
+				System.out.println("Folders not created in the %Appdata% ....");
+				
 			
 				Files.createDirectories((APP_DATA_PATH));
 				Files.createDirectories(PATH_STUDENT);
 				Files.createDirectories(PATH_TEACHER);
 				Files.createDirectories(PATH_ADMINSTRATOR);
 				
-				//create the Files for the password databases
-				PATH_STUDENT_PASSWORD.toFile().createNewFile();
-				PATH_TEACHER_PASSWORD.toFile().createNewFile();
-				PATH_ADMINSTRATOR_PASSWORD.toFile().createNewFile();
+				System.out.println("Folders Created");
+				
+				System.out.println();
+				System.out.println("Creating pasword databases for student, teacher and admin");
+				
+				//create the Files for the password/user databases
+				PATH_STUDENT_PASSWORD_TXT.toFile().createNewFile();
+				PATH_TEACHER_PASSWORD_TXT.toFile().createNewFile();
+				PATH_ADMINSTRATOR_PASSWORD_TXT.toFile().createNewFile();
+				
+				System.out.println("Database created!");
 				
 			} catch (IOException e1) {
 			//if there are any problems, print out an error message!
 				e1.printStackTrace();
 			}
 		}
+		
+		System.out.println("Pre init check done all up to date!");
 
-	}
-	/*
-	 * This method will first check to see if an account is already created in a file and if it is not it will add it to the database with the password
-	 * encrypted using an md5 hashing method. 
-	 */
-	public void addUserNameAndPasswordToDataBase(String Username, String Password) 
-	{
-					
-		
-		
-			
-	
-	}
-	private String encryptPassword(String password) {
-			
-
-		
-		return "";
+	//end PreInit	
 	}
 	
-	private void writeToFile(String user, String md5) {
-
+	//This will create the folders for each account
+	//this will be run everytime some one creates an account
+	//the password will also be added to the database
+	// Student will get a folder with their classes, another folder for their grades
+		public void createAccountFileFolder(String name, String password, String userName, String account) {
+		
+		//student
+			if(account.equalsIgnoreCase("student")) {
+				
+				
+				
+		//end student		
+			}
+			
+			
+		
+			
+			
+		
+		//end createAccountFolders
+		}
+	
 		
 		
-
-	}
+		
+	//This will write to password database
+		public void writePasswordToDataBase(String account, String userName, String password) {
+			//student	
+			//open the student password database file
+			if(account.equalsIgnoreCase("student")) {
+			//write to file	
+				try {
+				    PrintWriter print = new PrintWriter(new BufferedWriter(new FileWriter(PATH_STUDENT_PASSWORD_TXT.toFile(), true)));
+				    print.println(userName +" " + password);
+				    print.close();
+				} catch (IOException e) {
+				    //where is the file
+					System.out.println("File not found!!!!");
+				}	
+		//end student	
+			}			
+		//Teacher
+			//open the teacher password database file
+			if(account.equalsIgnoreCase("teacher")) {
+			//write to file	
+				try {
+				    PrintWriter print = new PrintWriter(new BufferedWriter(new FileWriter(PATH_TEACHER_PASSWORD_TXT.toFile(), true)));
+				    print.println(userName +" " + password);
+				    print.close();
+				} catch (IOException e) {
+				    //where is the file
+					System.out.println("File not found!!!!");
+				}	
+		//end teacher	
+			}
+			
+		//Admin
+			//open the student password database file
+			if(account.equalsIgnoreCase("admin")) {
+			//write to file	
+				try {
+				    PrintWriter print = new PrintWriter(new BufferedWriter(new FileWriter(PATH_ADMINSTRATOR_PASSWORD_TXT.toFile(), true)));
+				    print.println(userName +" " + password);
+				    print.close();
+				} catch (IOException e) {
+				    //where is the file
+					System.out.println("File not found!!!!");
+				}	
+		//end admin	
+			}		
+		//end passwordToDatabase
+		}
+		
 	
 }

@@ -14,19 +14,26 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+/*
+ * Programmer: Shreyas Patil 
+ * Latest worked on date: 11/28/15
+ * The Main purpose of this class is to display the frame to create a new account
+ */
+
 public class AccountCreationFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JPasswordField pwdEnterPassword;
 	private JPasswordField pwdReenterPassword;
 	private JTextField txtUserName;
+	private JTextField txtName;
 
 	/**
 	 * Create the frame.
 	 */
 	public AccountCreationFrame() {
 		
-		setBounds(100, 100, 531, 427);
+		setBounds(100, 100, 531, 434);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -38,11 +45,11 @@ public class AccountCreationFrame extends JFrame {
 		JLabel lblAccountCreation = new JLabel("Account Creation");
 		lblAccountCreation.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		lblAccountCreation.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAccountCreation.setBounds(10, 11, 374, 33);
+		lblAccountCreation.setBounds(10, 11, 495, 33);
 		contentPane.add(lblAccountCreation);
 
 		pwdEnterPassword = new JPasswordField();
-		pwdEnterPassword.setBounds(155, 184, 194, 20);
+		pwdEnterPassword.setBounds(155, 219, 194, 20);
 		pwdEnterPassword.getDocument().addDocumentListener(null);
 		contentPane.add(pwdEnterPassword);
 
@@ -53,40 +60,40 @@ public class AccountCreationFrame extends JFrame {
 		contentPane.add(lbl_Student_Admin_Teacher);
 
 		pwdReenterPassword = new JPasswordField();
-		pwdReenterPassword.setBounds(155, 247, 194, 20);
+		pwdReenterPassword.setBounds(155, 286, 194, 20);
 		contentPane.add(pwdReenterPassword);
 
 		txtUserName = new JTextField();
 		txtUserName.setToolTipText("");
-		txtUserName.setBounds(155, 121, 194, 20);
+		txtUserName.setBounds(155, 161, 194, 20);
 		contentPane.add(txtUserName);
 		txtUserName.setColumns(10);
 
 		JLabel lblNewLabel = new JLabel("User Name");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel.setBounds(10, 122, 86, 14);
+		lblNewLabel.setBounds(10, 162, 86, 14);
 		contentPane.add(lblNewLabel);
 
 		JLabel lblEnterPassword = new JLabel("Enter Password");
 		lblEnterPassword.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblEnterPassword.setBounds(10, 187, 107, 14);
+		lblEnterPassword.setBounds(10, 222, 107, 14);
 		contentPane.add(lblEnterPassword);
 
 		JLabel lblReenterPassword = new JLabel("Reenter Password");
 		lblReenterPassword.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblReenterPassword.setBounds(10, 247, 120, 20);
+		lblReenterPassword.setBounds(10, 286, 120, 20);
 		contentPane.add(lblReenterPassword);
 		
 		JRadioButton studentRadioButton = new JRadioButton("Student");
-		studentRadioButton.setBounds(377, 118, 109, 23);
+		studentRadioButton.setBounds(377, 158, 109, 23);
 		contentPane.add(studentRadioButton);
 		
 		JRadioButton teacherRadioButton = new JRadioButton("Teacher");
-		teacherRadioButton.setBounds(377, 181, 109, 23);
+		teacherRadioButton.setBounds(377, 216, 109, 23);
 		contentPane.add(teacherRadioButton);
 		
 		JRadioButton adminRadioButton = new JRadioButton("Adminstrator");
-		adminRadioButton.setBounds(377, 244, 109, 23);
+		adminRadioButton.setBounds(377, 283, 109, 23);
 		contentPane.add(adminRadioButton);
 		
 		
@@ -123,25 +130,36 @@ public class AccountCreationFrame extends JFrame {
 						
 					AccountManager manager = new AccountManager();
 					
+					String name = txtName.getText();
+					
 					String person = "";
-					String name = txtUserName.getText();
+					String UserName = txtUserName.getText();
 					String Password = pwdEnterPassword.getText();
 					
-					if(studentRadioButton.isSelected()) {
-						person = "student";
-					} else if(teacherRadioButton.isSelected()){
-						person = "teacher";
-					} else {
-						person = "admin";
-					}
+				if(name.equalsIgnoreCase(UserName)) {
 					
-					manager.createAccountForPerson(person, name, Password);
+				JOptionPane.showMessageDialog(null, "Please make sure that your username is not the same thing as your name");	
+			
+		} else {
+			if(studentRadioButton.isSelected()) {
+				person = "student";
+			} else if(teacherRadioButton.isSelected()){
+				person = "teacher";
+			} else {
+				person = "admin";
+			}
+			
+			manager.createAccountForPerson(person, UserName, Password);
+			
+			//kill the account creation frame and go back to the main menu
+			dispose();
+			
+			//display message
+			JOptionPane.showMessageDialog(null, "Account Created!");
+			
+		}
 					
-					//kill the account creation frame and go back to the main menu
-					dispose();
 					
-					//display message
-					JOptionPane.showMessageDialog(null, "Account Created!");
 				}
 			} else {
 				//Display "select a option teacher, student, or admin
@@ -155,8 +173,19 @@ public class AccountCreationFrame extends JFrame {
 			}
 		});
 		
-		btnEnter.setBounds(155, 328, 89, 23);
+		btnEnter.setBounds(212, 349, 89, 23);
 		contentPane.add(btnEnter);
+		
+		JLabel lblName = new JLabel("Name");
+		lblName.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblName.setBounds(10, 102, 86, 14);
+		contentPane.add(lblName);
+		
+		txtName = new JTextField();
+		txtName.setToolTipText("");
+		txtName.setColumns(10);
+		txtName.setBounds(155, 101, 194, 20);
+		contentPane.add(txtName);
 		
 		
 	}

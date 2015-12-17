@@ -4,6 +4,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Admin.AdminLogin;
+import Student.StudentLogin;
+import Teacher.TeacherLogin;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -62,7 +67,7 @@ public class Main extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			
 				
-				
+				new StudentLogin();
 			
 				
 			
@@ -72,10 +77,20 @@ public class Main extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JButton btnTeacher = new JButton("Teacher");
+		btnTeacher.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new TeacherLogin();
+			}
+		});
 		btnTeacher.setBounds(128, 181, 207, 23);
 		contentPane.add(btnTeacher);
 		
 		JButton btnAdminstrator = new JButton("Adminstrator");
+		btnAdminstrator.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new AdminLogin();
+			}
+		});
 		btnAdminstrator.setBounds(128, 257, 207, 23);
 		contentPane.add(btnAdminstrator);
 		

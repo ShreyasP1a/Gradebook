@@ -147,14 +147,50 @@ public class FileManager {
 	//this will be run everytime some one creates an account
 	//the password will also be added to the database
 	// Student will get a folder with their classes, another folder for their grades
-		public void createAccountFileFolder(String name, String password, String userName, String account) {
+		
+	public void createAccountFileFolder(String account, String name, String password, String userName) {
 		
 		//student
 			if(account.equalsIgnoreCase("student")) {
 				
+			//write password to database	
+			writePasswordToDataBase(account, userName, password, name);
+			//create the neccessary files and folders
+			Path folder = Paths.get(PATH_STUDENT + "/"+userName);
+			try {
+				Files.createDirectories(folder);
+				Path classes  = Paths.get(PATH_STUDENT + "/"+userName + "/classes");
+				Path apExams = Paths.get(PATH_STUDENT + "/"+userName + "/ap exams");
+				
+				Files.createDirectories(classes);
+				Files.createDirectories(apExams);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 				
 				
 		//end student		
+			}
+		//teacher
+			else if (account.equalsIgnoreCase("teacher")) {
+				
+				//write password to database	
+				writePasswordToDataBase(account, userName, password, name);
+				//create the neccessary files and folders
+				Path folder = Paths.get(PATH_TEACHER + "/"+userName);
+				try {
+					Files.createDirectories(folder);
+					Path classes  = Paths.get(PATH_TEACHER + "/"+userName + "/classes");
+					Path apExams = Paths.get(PATH_TEACHER+ "/"+userName + "/ap exams");
+					
+					Files.createDirectories(classes);
+					Files.createDirectories(apExams);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
+		//end teacher	
 			}
 			
 			
@@ -169,14 +205,14 @@ public class FileManager {
 		
 		
 	//This will write to password database
-		public void writePasswordToDataBase(String account, String userName, String password) {
+		public void writePasswordToDataBase(String account, String userName, String password,String name) {
 			//student	
 			//open the student password database file
 			if(account.equalsIgnoreCase("student")) {
 			//write to file	
 				try {
 				    PrintWriter print = new PrintWriter(new BufferedWriter(new FileWriter(PATH_STUDENT_PASSWORD_TXT.toFile(), true)));
-				    print.println(userName +" " + password);
+				    print.println(userName +" " + password + " " +  name);
 				    print.close();
 				} catch (IOException e) {
 				    //where is the file
@@ -190,7 +226,7 @@ public class FileManager {
 			//write to file	
 				try {
 				    PrintWriter print = new PrintWriter(new BufferedWriter(new FileWriter(PATH_TEACHER_PASSWORD_TXT.toFile(), true)));
-				    print.println(userName +" " + password);
+				    print.println(userName +" " + password + " " +  name);
 				    print.close();
 				} catch (IOException e) {
 				    //where is the file
@@ -205,7 +241,7 @@ public class FileManager {
 			//write to file	
 				try {
 				    PrintWriter print = new PrintWriter(new BufferedWriter(new FileWriter(PATH_ADMINSTRATOR_PASSWORD_TXT.toFile(), true)));
-				    print.println(userName +" " + password);
+				    print.println(userName +" " + password + " " +  name);
 				    print.close();
 				} catch (IOException e) {
 				    //where is the file

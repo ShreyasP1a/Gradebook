@@ -149,7 +149,7 @@ public class AccountCreationFrame extends JFrame {
 				person = "admin";
 			}
 			
-			manager.createAccountForPerson(person, UserName, Password);
+			manager.createAccountForPerson(person, name, Password, userName);
 			
 			//kill the account creation frame and go back to the main menu
 			dispose();

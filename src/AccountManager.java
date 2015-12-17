@@ -37,13 +37,14 @@ public class AccountManager {
 	
 	//This method will access the File manager and create then neccessary files for each person 
 	
-	public void createAccountForPerson(String person, String name, String password) {
+	public void createAccountForPerson(String person, String name, String password, String userName) {
 		FileManager manager = new FileManager();
 		//Console console message
 		System.out.println("----------------------------------------------------");
 		
 		System.out.println("Getting information from Account Creation Frame! ...");
 		System.out.println();
+		System.out.println("User Name: " + userName);
 		System.out.println("Name: " + name);
 		System.out.println("Account: " + person);
 		System.out.println("Password: " + password);
@@ -52,7 +53,7 @@ public class AccountManager {
 		//check which account is created
 		
 		if(person.equalsIgnoreCase("student")) {
-			
+			manager.createAccountFileFolder(person, name, password, userName);
 		} 
 		else if(person.equalsIgnoreCase("teacher")) {
 			

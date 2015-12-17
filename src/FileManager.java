@@ -182,15 +182,31 @@ public class FileManager {
 				try {
 					Files.createDirectories(folder);
 					Path classes  = Paths.get(PATH_TEACHER + "/"+userName + "/classes");
-					Path apExams = Paths.get(PATH_TEACHER+ "/"+userName + "/ap exams");
+					
 					
 					Files.createDirectories(classes);
-					Files.createDirectories(apExams);
+					
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}	
 		//end teacher	
+			} 
+		//Admin	
+			else {
+				//write password to database	
+				writePasswordToDataBase(account, userName, password, name);
+				//create the neccessary files and folders
+				Path folder = Paths.get(PATH_ADMINSTRATOR + "/"+userName);
+				try {
+					Files.createDirectories(folder);
+						
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
+				
+		//end Admin	
 			}
 			
 			

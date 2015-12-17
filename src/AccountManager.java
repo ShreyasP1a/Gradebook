@@ -56,9 +56,9 @@ public class AccountManager {
 			manager.createAccountFileFolder(person, name, password, userName);
 		} 
 		else if(person.equalsIgnoreCase("teacher")) {
-			
+			manager.createAccountFileFolder(person, name, password, userName);
 		} else {
-			
+			manager.createAccountFileFolder(person, name, password, userName);
 		}
 			
 			

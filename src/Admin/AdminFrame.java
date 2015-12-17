@@ -6,10 +6,15 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import AccountSettings.AccountSettingsFrame;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AdminFrame extends JFrame {
 
@@ -55,6 +60,11 @@ public class AdminFrame extends JFrame {
 		contentPane.add(btnSechduleApExams);
 		
 		JButton button = new JButton("Account Settings");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new AccountSettingsFrame();
+			}
+		});
 		button.setBounds(48, 312, 159, 23);
 		contentPane.add(button);
 		setVisible(true);

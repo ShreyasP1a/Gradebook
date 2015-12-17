@@ -27,8 +27,8 @@ public class ChangeUserNameFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public ChangeUserNameFrame() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 322);
+		
+		setBounds(100, 100, 452, 377);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -53,7 +53,7 @@ public class ChangeUserNameFrame extends JFrame {
 		contentPane.add(txtRenterNewUser);
 		
 		JButton btnChange = new JButton("Change");
-		btnChange.setBounds(246, 249, 89, 23);
+		btnChange.setBounds(281, 304, 89, 23);
 		contentPane.add(btnChange);
 		
 		JLabel lblNewLabel = new JLabel("User Name Change");
@@ -63,7 +63,7 @@ public class ChangeUserNameFrame extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setBounds(105, 249, 89, 23);
+		btnCancel.setBounds(97, 304, 89, 23);
 		contentPane.add(btnCancel);
 		setVisible(true);
 		setLocationRelativeTo(null);

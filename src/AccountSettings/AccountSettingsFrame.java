@@ -10,6 +10,8 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AccountSettingsFrame extends JFrame {
 
@@ -23,8 +25,8 @@ public class AccountSettingsFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public AccountSettingsFrame() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 291, 259);
+		
+		setBounds(100, 100, 365, 350);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -33,7 +35,7 @@ public class AccountSettingsFrame extends JFrame {
 		JLabel lblNewLabel = new JLabel("Account Settings");
 		lblNewLabel.setFont(new Font("Arial Black", Font.PLAIN, 14));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(-11, 11, 298, 21);
+		lblNewLabel.setBounds(29, 11, 298, 21);
 		contentPane.add(lblNewLabel);
 		
 		JLabel label = new JLabel("");
@@ -41,14 +43,26 @@ public class AccountSettingsFrame extends JFrame {
 		contentPane.add(label);
 		
 		JButton btnChangeUserName = new JButton("Change User Name");
-		btnChangeUserName.setBounds(72, 87, 130, 23);
+		btnChangeUserName.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ChangeUserNameFrame();
+			}
+		});
+		btnChangeUserName.setBounds(106, 121, 155, 23);
 		contentPane.add(btnChangeUserName);
 		
 		JButton btnChangePassword = new JButton("Change Password");
-		btnChangePassword.setBounds(72, 149, 130, 23);
+		btnChangePassword.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ChangePasswordFrame();
+			}
+		});
+		btnChangePassword.setBounds(106, 215, 155, 23);
 		contentPane.add(btnChangePassword);
 		setVisible(true);
 		setLocationRelativeTo(null);
 	}
+
+	
 
 }

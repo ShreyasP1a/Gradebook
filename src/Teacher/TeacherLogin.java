@@ -11,6 +11,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TeacherLogin extends JFrame {
 
@@ -60,6 +62,11 @@ public class TeacherLogin extends JFrame {
 		panel.add(button);
 		
 		JButton button_1 = new JButton("Login");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new TeacherFrame();
+			}
+		});
 		button_1.setBounds(345, 253, 89, 23);
 		panel.add(button_1);
 		

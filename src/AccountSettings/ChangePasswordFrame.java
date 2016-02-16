@@ -7,11 +7,14 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JPasswordField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ChangePasswordFrame extends JFrame {
 
@@ -46,6 +49,12 @@ public class ChangePasswordFrame extends JFrame {
 		txtEnterOldUser.setColumns(10);
 		
 		JButton btnChange = new JButton("Change");
+		btnChange.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JOptionPane.showMessageDialog(null, "Password changed");
+				System.out.println("Password changed");
+			}
+		});
 		btnChange.setBounds(392, 329, 89, 23);
 		contentPane.add(btnChange);
 		
@@ -56,6 +65,11 @@ public class ChangePasswordFrame extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					dispose();
+			}
+		});
 		btnCancel.setBounds(22, 329, 89, 23);
 		contentPane.add(btnCancel);
 		
@@ -88,6 +102,7 @@ public class ChangePasswordFrame extends JFrame {
 		
 		setVisible(true);
 		setLocationRelativeTo(null);
+		
 	}
 
 }

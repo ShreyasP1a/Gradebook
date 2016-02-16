@@ -1,24 +1,30 @@
 package Student;
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import Default.FileManager;
 
 public class StudentLogin extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtUserName;
-	private JPasswordField passwordField;
+	private JPasswordField txtPasswordField;
+	
+	
 
 	/**
 	 * Launch the application.
@@ -29,6 +35,8 @@ public class StudentLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public StudentLogin() {		
+		FileManager file = new FileManager();
+		
 		setBounds(100, 100, 450, 362);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -49,21 +57,31 @@ public class StudentLogin extends JFrame {
 		txtUserName.setColumns(10);
 		
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
 		btnCancel.setBounds(10, 292, 89, 23);
 		contentPane.add(btnCancel);
 		
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+//				if(checkLogin(txtUserName, txtPasswordField.getPassword(), "student") == true) {
+//					
+//				}
+				
 				new StudentFrame();
 			}
 		});
 		btnLogin.setBounds(335, 292, 89, 23);
 		contentPane.add(btnLogin);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(174, 210, 185, 33);
-		contentPane.add(passwordField);
+		txtPasswordField = new JPasswordField();
+		txtPasswordField.setBounds(174, 210, 185, 33);
+		contentPane.add(txtPasswordField);
 		
 		JLabel lblNewLabel_1 = new JLabel("User Name");
 		lblNewLabel_1.setFont(new Font("Arial Black", Font.PLAIN, 14));

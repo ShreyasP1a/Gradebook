@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ChangeUserNameFrame extends JFrame {
 
@@ -63,6 +65,11 @@ public class ChangeUserNameFrame extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnCancel.setBounds(97, 304, 89, 23);
 		contentPane.add(btnCancel);
 		setVisible(true);

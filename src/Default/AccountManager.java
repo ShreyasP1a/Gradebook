@@ -28,7 +28,7 @@ public class AccountManager {
 	 * Adminstrators:
 	 * 	Admin will have one file containg all of the students in the system
 	 * 	Admin will also have acces to a list of files in a folder containg all of the teachers and their list of classes and a list of students
-	 * 	Admin will also have access to a list containg a list of IB and AP exams and their dates
+	 * 	Admin will also have access to a list containg a list of AP exams and their dates
 	 * 
 	 */
 	
@@ -63,9 +63,7 @@ public class AccountManager {
 		}
 			
 	}
-	public void returnAccountStatus(){
-		
-	}
+
 	
 
 }

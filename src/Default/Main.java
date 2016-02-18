@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Admin.AP;
 import Admin.AdminLogin;
 import Student.StudentLogin;
 import Teacher.TeacherLogin;
@@ -48,8 +49,9 @@ public class Main extends JFrame {
 	 * Create the frame.
 	 */
 	public Main() {
+		new AP();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 415);
+		setBounds(100, 100, 450, 411);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.LIGHT_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

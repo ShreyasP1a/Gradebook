@@ -24,8 +24,8 @@ public class StudentFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public StudentFrame() {
-		setBounds(100, 100, 323, 333);
+	public StudentFrame(String Name) {
+		setBounds(100, 100, 451, 410);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -34,20 +34,22 @@ public class StudentFrame extends JFrame {
 		JLabel lblWelcomeBack = new JLabel("Welcome Back");
 		lblWelcomeBack.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWelcomeBack.setFont(new Font("Arial Black", Font.PLAIN, 14));
-		lblWelcomeBack.setBounds(73, 11, 159, 37);
+		lblWelcomeBack.setBounds(10, 11, 415, 37);
 		contentPane.add(lblWelcomeBack);
 		
-		JLabel lblNewLabel = new JLabel("Name");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(73, 65, 159, 24);
-		contentPane.add(lblNewLabel);
+		JLabel lblName = new JLabel("");
+		lblName.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblName.setHorizontalAlignment(SwingConstants.CENTER);
+		lblName.setBounds(20, 59, 405, 31);
+		contentPane.add(lblName);
+		lblName.setText(Name);
 		
 		JButton btnNewButton = new JButton("Check your Grades");
-		btnNewButton.setBounds(49, 131, 210, 23);
+		btnNewButton.setBounds(10, 142, 403, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnCheckYourAp = new JButton("Check your Ap Exam Schedule");
-		btnCheckYourAp.setBounds(49, 189, 210, 23);
+		btnCheckYourAp.setBounds(10, 216, 403, 23);
 		contentPane.add(btnCheckYourAp);
 		
 		JButton btnAccountSettings = new JButton("Account Settings");
@@ -56,7 +58,7 @@ public class StudentFrame extends JFrame {
 				new AccountSettingsFrame();
 			}
 		});
-		btnAccountSettings.setBounds(49, 246, 210, 23);
+		btnAccountSettings.setBounds(10, 292, 403, 23);
 		contentPane.add(btnAccountSettings);
 		setVisible(true);
 		setLocationRelativeTo(null);

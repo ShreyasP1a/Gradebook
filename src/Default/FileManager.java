@@ -312,15 +312,18 @@ public class FileManager {
 						}
 						 
 						for(String a : studentPassword) {
-							wordSplit = a.split(" ");
+							wordSplit = a.split("\\s+");
+							
 						
-							if(userName.equalsIgnoreCase(wordSplit[2])) {
+							
+							
+							
+							if(userName.equalsIgnoreCase(wordSplit[0])) {
 							
 								if(password.equalsIgnoreCase(wordSplit[1])) {
 								
 									return true;
-
-									
+			
 								} else {
 									return false;
 								}
@@ -343,6 +346,36 @@ public class FileManager {
 		
 	
 			return false;		
+	}
+	
+	public String getName(String userName, String person) {
+		if(person.equalsIgnoreCase("student")) {
+			ArrayList<String> studentPassword = new ArrayList();
+			Scanner inputStudentPasswordFile;
+			String[] wordSplit;
+			try {
+				inputStudentPasswordFile = new Scanner(PATH_STUDENT_PASSWORD_TXT);
+				while(inputStudentPasswordFile.hasNext()) {
+					studentPassword.add(inputStudentPasswordFile.nextLine()); 
+				}
+							for(String a : studentPassword) {
+					wordSplit = a.split("\\s+");
+					if(userName.equalsIgnoreCase(wordSplit[0])) {
+					
+							return wordSplit[2];
+					}
+				
+				}
+		inputStudentPasswordFile.close();
+		
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+	//end student	
+	}
+		return "";
 	}
 
 }

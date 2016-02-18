@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -68,12 +69,20 @@ public class StudentLogin extends JFrame {
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				String password = txtPasswordField.getText();
 				
-//				if(checkLogin(txtUserName, txtPasswordField.getPassword(), "student") == true) {
-//					
-//				}
+				if(file.checkLogin(password, txtUserName.getText(), "student") == true) {
+						JOptionPane.showMessageDialog(null, "Logging in! ");
+						new StudentFrame(file.getName(txtUserName.getText(), "student"));
+						dispose();
+				} else {
+					JOptionPane.showMessageDialog(null, "Wrong password or UserName ");
+					txtUserName.setText("");
+					txtPasswordField.setText("");
+					
+				}
 				
-				new StudentFrame();
+				
 			}
 		});
 		btnLogin.setBounds(335, 292, 89, 23);

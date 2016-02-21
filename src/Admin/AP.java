@@ -1,10 +1,8 @@
 package Admin;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,21 +10,15 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
-
 import Default.FileManager;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
 public class AP extends JFrame {
-
-
 	private DefaultListModel listModel;
 	private FileManager file = new FileManager();
 
-	
-	
 	private JPanel contentPane;
 
 	public AP() {
@@ -38,20 +30,11 @@ public class AP extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
 		JLabel lblNewLabel = new JLabel("AP Tests");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(10, 11, 315, 28);
 		lblNewLabel.setFont(new Font("Arial Black", Font.PLAIN, 17));
 		contentPane.add(lblNewLabel);
-			
-
-		
-		
-		
-
-		
-
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(30, 70, 279, 331);
 		contentPane.add(scrollPane);
@@ -68,9 +51,6 @@ public class AP extends JFrame {
 		for(String a : apLists) {
 			listModel.addElement(a);
 		}
-		
-		
-		
 		
 		final JList list = new JList(listModel);
 		scrollPane.setViewportView(list);
@@ -90,10 +70,5 @@ public class AP extends JFrame {
 		
 		setVisible(true);
 		setLocationRelativeTo(null);
-	
-
-		
-	
-	
 	}
 }

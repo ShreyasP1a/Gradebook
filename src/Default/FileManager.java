@@ -316,10 +316,6 @@ public class FileManager {
 						for(String a : studentPassword) {
 							wordSplit = a.split("\\s+");
 							
-						
-							
-							
-							
 							if(userName.equalsIgnoreCase(wordSplit[0])) {
 							
 								if(password.equalsIgnoreCase(wordSplit[1])) {
@@ -350,7 +346,7 @@ public class FileManager {
 			return false;		
 	}
 	
-	public String getName(String userName, String person) {
+	public String getNameForPasswordLogin(String userName, String person) {
 		if(person.equalsIgnoreCase("student")) {
 			ArrayList<String> studentPassword = new ArrayList();
 			Scanner inputStudentPasswordFile;
@@ -381,15 +377,14 @@ public class FileManager {
 	}
 	
 //returns an array list containg the all of the names for the each class admin teacher and student
-public ArrayList<String> getNamesList(String name) {
-		
-		
-	ArrayList<String> test = new ArrayList();
-		return test;
+public ArrayList<String> getNamesList(String name) {	
+	ArrayList<String> names = new ArrayList<String>();
+	
+		return names;
 }
 //returns the arraylist of all of the ap classes from the aplist.txt
 public ArrayList<String> getApList() {
-	ArrayList<String> apList = new ArrayList();
+	ArrayList<String> apList = new ArrayList<String>();
 	
 	try {
 		Scanner input = new Scanner(PATH_AP_LIST.toFile());

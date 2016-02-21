@@ -1,5 +1,6 @@
 package Default;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -70,7 +71,8 @@ public class FileManager {
 	private static final String ADMIN = "ADMINSTRATOR";
 	private static final String TEACHER = "TEACHER";
 
-//	
+	//Path to the AP List
+	private static final Path PATH_AP_LIST = Paths.get("/Gradebook intensity/src/APLIST/APLIST.txt");
 	public static Scanner getPasswordFile(String person) {
 		try {
 			Scanner scannerStudentPassword = new Scanner(PATH_STUDENT_PASSWORD_TXT);
@@ -377,5 +379,28 @@ public class FileManager {
 	}
 		return "";
 	}
-
+public ArrayList<String> getNamesList(String name) {
+		ArrayList<String> names = new ArrayList();
+	
+		
+	
+		return names;
+}
+public ArrayList<String> getApList() {
+	ArrayList<String> apList = new ArrayList();
+	
+	try {
+		Scanner input = new Scanner(PATH_AP_LIST.toFile());
+		while(input.hasNext()) {
+			apList.add(input.nextLine());
+		}
+		return apList;
+		
+	} catch (FileNotFoundException e) {
+		
+		e.printStackTrace();
+	}
+	
+	return apList;
+}
 }

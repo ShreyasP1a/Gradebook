@@ -157,6 +157,7 @@ public class AccountCreationFrame extends JFrame {
 			
 			//display message
 			JOptionPane.showMessageDialog(null, "Account Created!");
+			dispose();
 			
 		}
 					

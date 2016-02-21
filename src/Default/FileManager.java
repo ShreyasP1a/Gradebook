@@ -379,13 +379,15 @@ public class FileManager {
 	}
 		return "";
 	}
+	
+//returns an array list containg the all of the names for the each class admin teacher and student
 public ArrayList<String> getNamesList(String name) {
-		ArrayList<String> names = new ArrayList();
-	
 		
-	
-		return names;
+		
+	ArrayList<String> test = new ArrayList();
+		return test;
 }
+//returns the arraylist of all of the ap classes from the aplist.txt
 public ArrayList<String> getApList() {
 	ArrayList<String> apList = new ArrayList();
 	

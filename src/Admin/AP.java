@@ -14,6 +14,10 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import Default.FileManager;
+import javax.swing.SwingConstants;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AP extends JFrame {
 
@@ -27,7 +31,7 @@ public class AP extends JFrame {
 
 	public AP() {
 
-		setBounds(100, 100, 448, 487);
+		setBounds(100, 100, 368, 487);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.LIGHT_GRAY);
@@ -36,7 +40,8 @@ public class AP extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("AP Tests");
-		lblNewLabel.setBounds(10, 11, 314, 28);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(10, 11, 315, 28);
 		lblNewLabel.setFont(new Font("Arial Black", Font.PLAIN, 17));
 		contentPane.add(lblNewLabel);
 			
@@ -64,11 +69,24 @@ public class AP extends JFrame {
 			listModel.addElement(a);
 		}
 		
-		listModel.addElement("test");
+		
 		
 		
 		final JList list = new JList(listModel);
 		scrollPane.setViewportView(list);
+		
+		JButton btnPickAp = new JButton("Pick AP");
+		btnPickAp.setBounds(220, 412, 89, 23);
+		contentPane.add(btnPickAp);
+		
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
+		btnCancel.setBounds(30, 412, 89, 23);
+		contentPane.add(btnCancel);
 		
 		setVisible(true);
 		setLocationRelativeTo(null);

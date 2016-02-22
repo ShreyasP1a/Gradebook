@@ -1,19 +1,18 @@
 package Student;
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import AccountSettings.AccountSettingsFrame;
-
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import Admin.AP;
+import Default.FileManager;
 
 public class StudentFrame extends JFrame {
 
@@ -25,6 +24,7 @@ public class StudentFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public StudentFrame(String Name) {
+		FileManager file = new FileManager();
 		setBounds(100, 100, 451, 410);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -49,6 +49,13 @@ public class StudentFrame extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JButton btnCheckYourAp = new JButton("Check your Ap Exam Schedule");
+		btnCheckYourAp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String userName = file.getUserNameFromName(Name, "student");
+				
+				new APSchedule(userName);
+			}
+		});
 		btnCheckYourAp.setBounds(10, 216, 403, 23);
 		contentPane.add(btnCheckYourAp);
 		

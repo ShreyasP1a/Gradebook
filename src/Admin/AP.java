@@ -1,25 +1,30 @@
 package Admin;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Iterator;
+
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
-import Default.FileManager;
 import javax.swing.SwingConstants;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import Default.FileManager;
 public class AP extends JFrame {
 	private DefaultListModel listModel;
 	private FileManager file = new FileManager();
 
 	private JPanel contentPane;
+	java.util.List selectedValuesList;
 
 	public AP(String name) {
 
@@ -40,11 +45,13 @@ public class AP extends JFrame {
 		contentPane.add(scrollPane);
 
 		listModel = new DefaultListModel();
+		
+	
 
 
 		ArrayList<String> apList = new ArrayList();
 		
-		apList = file.getApList();
+		apList = file.getAllAPClass();
 		
 		final String[] apLists = apList.toArray(new String[0]);
 		
@@ -55,9 +62,23 @@ public class AP extends JFrame {
 		final JList list = new JList(listModel);
 		scrollPane.setViewportView(list);
 		
+		list.addListSelectionListener(new ListSelectionListener() {
+	        @Override
+	        public void valueChanged(ListSelectionEvent e) {
+	            if (!e.getValueIsAdjusting()) {
+	                selectedValuesList = list.getSelectedValuesList();
+	               
+	            }
+	        }
+	    });
+		
 		JButton btnPickAp = new JButton("Pick AP");
 		btnPickAp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+					dispose();
+					String userName = file.getUserNameFromName(name, "student");
+					file.writeApExamsToPerson(userName, selectedValuesList);
+				
 			}
 		});
 		btnPickAp.setBounds(298, 412, 89, 23);

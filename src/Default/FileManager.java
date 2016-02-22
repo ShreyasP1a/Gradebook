@@ -1,9 +1,12 @@
 package Default;
+import java.awt.List;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -73,6 +76,8 @@ public class FileManager {
 
 	//Path to the AP List
 	private static final Path PATH_AP_LIST = Paths.get("/Gradebook intensity/src/APLIST/APLIST.txt");
+	
+//this returns the scanner object of the password txt
 	public static Scanner getPasswordFile(String person) {
 		try {
 			Scanner scannerStudentPassword = new Scanner(PATH_STUDENT_PASSWORD_TXT);
@@ -178,21 +183,12 @@ public class FileManager {
 		// end PreInit
 	}
 	
-	public Path getPathToApExamsOrClassFolder(String apOrClass, String userName){
-		Path apOrClassPath = null;
-			if(apOrClass.equalsIgnoreCase("ap")) {
-			return 	apOrClassPath = Paths.get(PATH_STUDENT + "/" + userName + "/ap exams/");
-			}else {
-			return 	apOrClassPath = Paths.get(PATH_STUDENT + "/" + userName + "/classes/");
-					
-			}	
-	}
-
-	// This will create the folders for each account
-	// this will be run everytime some one creates an account
-	// the password will also be added to the database
-	// Student will get a folder with their classes, another folder for their
-	// grades
+	
+// This will create the folders for each account
+// this will be run everytime some one creates an account
+// the password will also be added to the database
+// Student will get a folder with their classes, another folder for their
+// grades
 
 	public void createAccountFileFolder(String account, String name, String password, String userName) {
 
@@ -256,7 +252,7 @@ public class FileManager {
 		// end createAccountFolders
 	}
 
-	// This will write to password database
+// This will write to password database
 	public void writePasswordToDataBase(String account, String userName, String password, String name) {
 		// student
 		// open the student password database file
@@ -310,8 +306,8 @@ public class FileManager {
 	
 	
 	
-	// whenever some one login this check if their passwords match
-	// This method is all done
+// whenever some one login this check if their passwords match
+// This method is all done
 	public static boolean checkLogin(String password, String userName, String person) {
 		//Input the files into scanner in order to read the passwords
 		//try and catch also there to catch an error in order to make sure that there is an acutual file
@@ -407,7 +403,8 @@ public class FileManager {
 			return false;		
 	}
 
-	//this method is to get the name of the person logging into the system can also be used in other parts of the program	
+	
+//this method is to get the name of the person logging into the system can also be used in other parts of the program	
 	public String getNameFromUserName(String userName, String person) {
 		if(person.equalsIgnoreCase("student")) {
 			ArrayList<String> studentName = new ArrayList();
@@ -487,6 +484,7 @@ public class FileManager {
 	}
 		return "";
 	}
+
 	
 //returns an array list containg the all of the names for the each class; teacher and student
 public ArrayList<String> getNamesList(String name) {	
@@ -534,8 +532,12 @@ public ArrayList<String> getNamesList(String name) {
 	}
 		return names;
 }
+
+
+
 //returns the arraylist of all of the ap classes from the aplist.txt
-public ArrayList<String> getApList() {
+public ArrayList<String> getAllAPClass() {
+
 	ArrayList<String> apList = new ArrayList<String>();
 	
 	try {
@@ -551,5 +553,167 @@ public ArrayList<String> getApList() {
 	}
 	
 	return apList;
+	}
+
+
+
+//this method writes all of the ap exams to apExams.txt in their respective student folder
+//this gets parameters from the ap class
+
+public void writeApExamsToPerson(String userName, java.util.List selectedValuesList) {
+	System.out.println(userName);
+	int a;
+	 a = JOptionPane.showConfirmDialog(null, "Are you sure this is all of the APs that this student is going to take?");
+	 if(a ==0){
+		 
+		 PrintWriter writer;
+		try {
+			File f = new File(PATH_STUDENT + "/" + userName + "/ap exams/apExams.txt");
+			
+			if (!f.exists()) {
+				// Create the file
+				f.createNewFile();
+				
+			}
+			writer = new PrintWriter(f, "UTF-8");
+			
+			Object[] array = ((java.util.List<String>) selectedValuesList).toArray();
+
+			System.out.println("*** iterating over the array ***");
+			for (Object str : array) {
+				
+				writer.print(str);
+				writer.println();
+				
+			}
+			
+			
+			writer.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	
+		
+	 }else {
+		 
+	 }
+	}
+
+
+
+//This method gets the userName from the Name
+public String getUserNameFromName(String name, String person) {
+	if(person.equalsIgnoreCase("student")) {
+		ArrayList<String> studentName = new ArrayList();
+		Scanner inputStudentPasswordFile;
+		String[] wordSplit;
+		try {
+			inputStudentPasswordFile = new Scanner(PATH_STUDENT_PASSWORD_TXT);
+			while(inputStudentPasswordFile.hasNext()) {
+				studentName.add(inputStudentPasswordFile.nextLine()); 
+			}
+						for(String a : studentName) {
+				wordSplit = a.split("\\s+");
+				if(name.equalsIgnoreCase(wordSplit[2])) {
+				
+						return wordSplit[0];
+				}
+			
+			}
+	inputStudentPasswordFile.close();
+//end student	
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+} else if(person.equalsIgnoreCase("teacher")) {
+	ArrayList<String> teacherName = new ArrayList();
+	Scanner inputTeacherPasswordFile;
+	String[] wordSplit;
+	try {
+		inputTeacherPasswordFile = new Scanner(PATH_TEACHER_PASSWORD_TXT);
+		while(inputTeacherPasswordFile.hasNext()) {
+			teacherName.add(inputTeacherPasswordFile.nextLine()); 
+		}
+					for(String a : teacherName) {
+			wordSplit = a.split("\\s+");
+			if(name.equalsIgnoreCase(wordSplit[2])) {
+			
+					return wordSplit[0];
+			}
+		
+		}
+inputTeacherPasswordFile.close();
+//end teacher	
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+} else {
+//Admin 
+	ArrayList<String> adminName = new ArrayList();
+	Scanner inputAdminPasswordFile;
+	String[] wordSplit;
+	try {
+		inputAdminPasswordFile = new Scanner(PATH_ADMINSTRATOR_PASSWORD_TXT);
+		while(inputAdminPasswordFile.hasNext()) {
+			adminName.add(inputAdminPasswordFile.nextLine()); 
+		}
+					for(String a : adminName) {
+			wordSplit = a.split("\\s+");
+			if(name.equalsIgnoreCase(wordSplit[2])) {
+			
+					return wordSplit[0];
+			}
+		
+		}
+inputAdminPasswordFile.close();
+//end admin	
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	
+}
+	return "";
+	
+	
+}
+
+//This method will return the list of all of the ap classes that a student is taking
+//The method takes in the userName parameter
+public ArrayList<String>  getApList(String userName){
+	ArrayList<String> apList = new ArrayList<String>();
+	Path apPath = Paths.get(PATH_STUDENT + "/" + userName + "/ap exams/apExams.txt");
+	
+		try {
+			Scanner input = new Scanner(apPath.toFile());
+			
+			while(input.hasNextLine()) {
+				apList.add(input.nextLine());
+			}
+		input.close();
+		return apList;
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	
+		
+	
+	
+	return apList;
 }
 }
+

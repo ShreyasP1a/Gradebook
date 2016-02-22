@@ -1,18 +1,20 @@
 	package Teacher;
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JPasswordField;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import Default.FileManager;
+import Student.StudentFrame;
 
 public class TeacherLogin extends JFrame {
 
@@ -29,6 +31,7 @@ public class TeacherLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public TeacherLogin() {
+		FileManager file = new FileManager();
 		
 		setBounds(100, 100, 450, 325);
 		contentPane = new JPanel();
@@ -47,7 +50,7 @@ public class TeacherLogin extends JFrame {
 		JLabel lblTeacherLogin = new JLabel("Teacher Login");
 		lblTeacherLogin.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTeacherLogin.setFont(new Font("Arial Black", Font.PLAIN, 16));
-		lblTeacherLogin.setBounds(44, 11, 341, 33);
+		lblTeacherLogin.setBounds(0, 11, 434, 33);
 		panel.add(lblTeacherLogin);
 		
 		userNameTxt = new JTextField();
@@ -58,17 +61,10 @@ public class TeacherLogin extends JFrame {
 		panel.add(userNameTxt);
 		
 		JButton button = new JButton("Cancel");
-		button.setBounds(0, 253, 89, 23);
+		button.setBounds(20, 253, 89, 23);
 		panel.add(button);
 		
-		JButton button_1 = new JButton("Login");
-		button_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new TeacherFrame();
-			}
-		});
-		button_1.setBounds(345, 253, 89, 23);
-		panel.add(button_1);
+		
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(174, 171, 185, 33);
@@ -83,8 +79,33 @@ public class TeacherLogin extends JFrame {
 		JLabel label_2 = new JLabel("Password");
 		label_2.setHorizontalAlignment(SwingConstants.CENTER);
 		label_2.setFont(new Font("Arial Black", Font.PLAIN, 14));
-		label_2.setBounds(0, 169, 109, 33);
+		label_2.setBounds(0, 169, 99, 33);
 		panel.add(label_2);
+		
+		JButton button_1 = new JButton("Login");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String password = passwordField.getText();
+				
+				if(file.checkLogin(password, userNameTxt.getText(), "teacher") == true) {
+						JOptionPane.showMessageDialog(null, "Logging in! ");
+						new TeacherFrame(file.getNameForPasswordLogin(userNameTxt.getText(), "teacher"));
+						dispose();
+						password = "";
+						userNameTxt.setText("");
+						passwordField.setText("");
+						
+				} else {
+					JOptionPane.showMessageDialog(null, "Wrong password or UserName ");
+					userNameTxt.setText("");
+					passwordField.setText("");
+					password = "";
+					
+				}
+			}
+		});
+		button_1.setBounds(321, 253, 89, 23);
+		panel.add(button_1);
 		setLocationRelativeTo(null);
 	}
 }

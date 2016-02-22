@@ -28,7 +28,7 @@ public class TeacherFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TeacherFrame() {
+	public TeacherFrame(String name) {
 		
 		setBounds(100, 100, 289, 342);
 		contentPane = new JPanel();
@@ -39,16 +39,17 @@ public class TeacherFrame extends JFrame {
 		JLabel label = new JLabel("Welcome Back");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new Font("Arial Black", Font.PLAIN, 14));
-		label.setBounds(48, 30, 159, 37);
+		label.setBounds(10, 30, 253, 37);
 		contentPane.add(label);
 		
-		JLabel label_1 = new JLabel("Name");
+		JLabel label_1 = new JLabel("");
+		label_1.setText(name);
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setBounds(48, 87, 159, 24);
+		label_1.setBounds(10, 87, 253, 24);
 		contentPane.add(label_1);
 		
 		JButton btnAllTeachers = new JButton("All Classes");
-		btnAllTeachers.setBounds(48, 172, 159, 23);
+		btnAllTeachers.setBounds(10, 172, 253, 23);
 		contentPane.add(btnAllTeachers);
 		
 		JButton btnSechduleApExams = new JButton("Account Settings");
@@ -57,7 +58,7 @@ public class TeacherFrame extends JFrame {
 				new AccountSettingsFrame();
 			}
 		});
-		btnSechduleApExams.setBounds(48, 228, 159, 23);
+		btnSechduleApExams.setBounds(10, 228, 263, 23);
 		contentPane.add(btnSechduleApExams);
 		setVisible(true);
 		setLocationRelativeTo(null);

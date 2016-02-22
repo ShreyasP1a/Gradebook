@@ -12,10 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import Admin.AP;
+import Admin.AdminFrame;
 import Admin.AdminLogin;
 import Student.StudentLogin;
-import Teacher.EnterGrades;
 import Teacher.TeacherLogin;
 
 public class Main extends JFrame {
@@ -47,8 +46,7 @@ public class Main extends JFrame {
 	 * Create the frame.
 	 */
 	public Main() {
-		new AP();
-		new EnterGrades();
+		new AdminFrame("kerr");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 411);
 		contentPane = new JPanel();
@@ -61,7 +59,7 @@ public class Main extends JFrame {
 		JLabel lblGradebook = new JLabel("Gradebook");
 		lblGradebook.setFont(new Font("Arial Black", Font.BOLD, 20));
 		lblGradebook.setHorizontalAlignment(SwingConstants.CENTER);
-		lblGradebook.setBounds(10, 11, 414, 37);
+		lblGradebook.setBounds(0, 11, 434, 37);
 		contentPane.add(lblGradebook);
 		
 		JButton btnNewButton = new JButton("Student");
@@ -72,7 +70,7 @@ public class Main extends JFrame {
 
 			}
 		});
-		btnNewButton.setBounds(128, 106, 207, 23);
+		btnNewButton.setBounds(118, 102, 207, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnTeacher = new JButton("Teacher");
@@ -81,7 +79,7 @@ public class Main extends JFrame {
 				new TeacherLogin();
 			}
 		});
-		btnTeacher.setBounds(128, 181, 207, 23);
+		btnTeacher.setBounds(118, 177, 207, 23);
 		contentPane.add(btnTeacher);
 		
 		JButton btnAdminstrator = new JButton("Adminstrator");
@@ -90,7 +88,7 @@ public class Main extends JFrame {
 				new AdminLogin();
 			}
 		});
-		btnAdminstrator.setBounds(128, 257, 207, 23);
+		btnAdminstrator.setBounds(118, 253, 207, 23);
 		contentPane.add(btnAdminstrator);
 		
 		JButton btnCreateAccount = new JButton("Create Account");
@@ -102,7 +100,7 @@ public class Main extends JFrame {
 			
 			}
 		});
-		btnCreateAccount.setBounds(128, 330, 207, 23);
+		btnCreateAccount.setBounds(118, 326, 207, 23);
 		contentPane.add(btnCreateAccount);
 	}
 }

@@ -21,7 +21,7 @@ public class AP extends JFrame {
 
 	private JPanel contentPane;
 
-	public AP() {
+	public AP(String name) {
 
 		setBounds(100, 100, 368, 487);
 		setLocationRelativeTo(null);

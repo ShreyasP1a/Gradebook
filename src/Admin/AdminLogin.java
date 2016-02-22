@@ -1,6 +1,4 @@
 package Admin;
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,16 +6,20 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import Default.FileManager;
+import Student.StudentFrame;
+
 public class AdminLogin extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtUserName;
-	private JPasswordField passwordField;
+	private JPasswordField txtPasswordField;
 	/**
 	 * Launch the application.
 	 */
@@ -27,7 +29,7 @@ public class AdminLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public AdminLogin() {
-		
+		FileManager file = new FileManager();
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
 		setBounds(100, 100, 450, 362);
@@ -51,21 +53,41 @@ public class AdminLogin extends JFrame {
 		txtUserName.setColumns(10);
 		
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
 		btnCancel.setBounds(10, 292, 89, 23);
 		contentPane.add(btnCancel);
+		
+		
+		
+		txtPasswordField = new JPasswordField();
+		txtPasswordField.setBounds(174, 210, 185, 33);
+		contentPane.add(txtPasswordField);
 		
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new AdminFrame();
+				String password = txtPasswordField.getText();
+				
+				if(file.checkLogin(password, txtUserName.getText(), "admin") == true) {
+						JOptionPane.showMessageDialog(null, "Logging in! ");
+						new AdminFrame(file.getNameForPasswordLogin(txtUserName.getText(), "admin"));
+						dispose();
+				} else {
+					JOptionPane.showMessageDialog(null, "Wrong password or UserName ");
+					txtUserName.setText("");
+					txtPasswordField.setText("");
+					
+				}
 			}
 		});
 		btnLogin.setBounds(335, 292, 89, 23);
 		contentPane.add(btnLogin);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(174, 210, 185, 33);
-		contentPane.add(passwordField);
+		
 		
 		JLabel lblNewLabel_1 = new JLabel("User Name");
 		lblNewLabel_1.setFont(new Font("Arial Black", Font.PLAIN, 14));

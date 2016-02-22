@@ -73,7 +73,7 @@ public class StudentLogin extends JFrame {
 				
 				if(file.checkLogin(password, txtUserName.getText(), "student") == true) {
 						JOptionPane.showMessageDialog(null, "Logging in! ");
-						new StudentFrame(file.getNameForPasswordLogin(txtUserName.getText(), "student"));
+						new StudentFrame(file.getNameFromUserName(txtUserName.getText(), "student"));
 						dispose();
 				} else {
 					JOptionPane.showMessageDialog(null, "Wrong password or UserName ");

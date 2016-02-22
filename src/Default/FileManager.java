@@ -177,6 +177,16 @@ public class FileManager {
 
 		// end PreInit
 	}
+	
+	public Path getPathToApExamsOrClassFolder(String apOrClass, String userName){
+		Path apOrClassPath = null;
+			if(apOrClass.equalsIgnoreCase("ap")) {
+			return 	apOrClassPath = Paths.get(PATH_STUDENT + "/" + userName + "/ap exams/");
+			}else {
+			return 	apOrClassPath = Paths.get(PATH_STUDENT + "/" + userName + "/classes/");
+					
+			}	
+	}
 
 	// This will create the folders for each account
 	// this will be run everytime some one creates an account
@@ -396,8 +406,9 @@ public class FileManager {
 	
 			return false;		
 	}
-	
-	public String getNameForPasswordLogin(String userName, String person) {
+
+	//this method is to get the name of the person logging into the system can also be used in other parts of the program	
+	public String getNameFromUserName(String userName, String person) {
 		if(person.equalsIgnoreCase("student")) {
 			ArrayList<String> studentName = new ArrayList();
 			Scanner inputStudentPasswordFile;

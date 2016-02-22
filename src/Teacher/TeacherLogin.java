@@ -89,7 +89,7 @@ public class TeacherLogin extends JFrame {
 				
 				if(file.checkLogin(password, userNameTxt.getText(), "teacher") == true) {
 						JOptionPane.showMessageDialog(null, "Logging in! ");
-						new TeacherFrame(file.getNameForPasswordLogin(userNameTxt.getText(), "teacher"));
+						new TeacherFrame(file.getNameFromUserName(userNameTxt.getText(), "teacher"));
 						dispose();
 						password = "";
 						userNameTxt.setText("");

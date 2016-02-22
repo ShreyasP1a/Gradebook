@@ -92,7 +92,10 @@ public class StudentLists extends JFrame {
 					} else {
 					String name = (String) listModel.getElementAt(list.getSelectedIndex());
 					System.out.println(name);
-						new AP(name);
+					dispose();
+					JOptionPane.showMessageDialog(null, "Hold Ctrl to select multiple AP's");
+					new AP(name);
+						
 					}
 					
 				}

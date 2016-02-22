@@ -74,7 +74,7 @@ public class AdminLogin extends JFrame {
 				
 				if(file.checkLogin(password, txtUserName.getText(), "admin") == true) {
 						JOptionPane.showMessageDialog(null, "Logging in! ");
-						new AdminFrame(file.getNameForPasswordLogin(txtUserName.getText(), "admin"));
+						new AdminFrame(file.getNameFromUserName(txtUserName.getText(), "admin"));
 						dispose();
 				} else {
 					JOptionPane.showMessageDialog(null, "Wrong password or UserName ");

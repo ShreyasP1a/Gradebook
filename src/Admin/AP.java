@@ -23,7 +23,7 @@ public class AP extends JFrame {
 
 	public AP(String name) {
 
-		setBounds(100, 100, 368, 487);
+		setBounds(100, 100, 413, 490);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.LIGHT_GRAY);
@@ -32,11 +32,11 @@ public class AP extends JFrame {
 		contentPane.setLayout(null);
 		JLabel lblNewLabel = new JLabel("AP Tests");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(10, 11, 315, 28);
+		lblNewLabel.setBounds(10, 11, 377, 23);
 		lblNewLabel.setFont(new Font("Arial Black", Font.PLAIN, 17));
 		contentPane.add(lblNewLabel);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(30, 70, 279, 331);
+		scrollPane.setBounds(10, 70, 377, 331);
 		contentPane.add(scrollPane);
 
 		listModel = new DefaultListModel();
@@ -56,7 +56,11 @@ public class AP extends JFrame {
 		scrollPane.setViewportView(list);
 		
 		JButton btnPickAp = new JButton("Pick AP");
-		btnPickAp.setBounds(220, 412, 89, 23);
+		btnPickAp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnPickAp.setBounds(298, 412, 89, 23);
 		contentPane.add(btnPickAp);
 		
 		JButton btnCancel = new JButton("Cancel");
@@ -65,8 +69,15 @@ public class AP extends JFrame {
 				dispose();
 			}
 		});
-		btnCancel.setBounds(30, 412, 89, 23);
+		btnCancel.setBounds(10, 412, 89, 23);
 		contentPane.add(btnCancel);
+		
+		JLabel labelName = new JLabel("");
+		labelName.setText("Scheduling AP Exams for: " + name);
+		labelName.setHorizontalAlignment(SwingConstants.CENTER);
+		labelName.setFont(new Font("Arial Black", Font.PLAIN, 17));
+		labelName.setBounds(10, 45, 377, 23);
+		contentPane.add(labelName);
 		
 		setVisible(true);
 		setLocationRelativeTo(null);

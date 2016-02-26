@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 import Admin.AdminFrame;
 import Admin.AdminLogin;
 import Student.StudentLogin;
+import Teacher.EnterGrades;
 import Teacher.TeacherLogin;
 
 public class Main extends JFrame {
@@ -46,7 +47,7 @@ public class Main extends JFrame {
 	 * Create the frame.
 	 */
 	public Main() {
-		new AdminFrame("kerr");
+		 new AdminFrame("kerr");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 411);
 		contentPane = new JPanel();

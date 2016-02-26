@@ -1,6 +1,7 @@
 package Admin;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -15,15 +16,18 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import Default.FileManager;
 public class StudentLists extends JFrame {
 	private DefaultListModel listModel;
 	private FileManager file = new FileManager();
+	java.util.List selectedValuesList;
 
 	private JPanel contentPane;
 
-	public StudentLists(int apOrClass) {
+	public StudentLists(int apOrClass, Boolean trueOrFalse, String teacherName, String nameOfClass) {
 
 		setBounds(100, 100, 401, 487);
 		setLocationRelativeTo(null);
@@ -71,16 +75,40 @@ public class StudentLists extends JFrame {
 		btnCancel.setBounds(10, 412, 89, 23);
 		contentPane.add(btnCancel);
 	
+		
+		list.addListSelectionListener(new ListSelectionListener() {
+	        @Override
+	        public void valueChanged(ListSelectionEvent e) {
+	            if (!e.getValueIsAdjusting()) {
+	                selectedValuesList = list.getSelectedValuesList();
+	               
+	            }
+	        }
+	    });
+		
+		
+		
+		
 		if(apOrClass == 0) {
 		
-		JButton btnAddToAClass = new JButton("Add to a Class");
-		btnAddToAClass.setBounds(109, 412, 139, 23);
+		if(trueOrFalse == true){
+			
+		JOptionPane.showMessageDialog(null, "Remeber you can select more than one student, once you create the class there are no edits to the class");	
+			JButton btnAddToAClass = new JButton("Add to a Class");
+		btnAddToAClass.setBounds(235, 412, 139, 23);
+		
+		btnAddToAClass.addActionListener(new ActionListener(){
+			
+			public void actionPerformed(ActionEvent arg0) {
+				file.createClass(nameOfClass, teacherName, selectedValuesList);
+			}
+		});
 		contentPane.add(btnAddToAClass);
-		
-		
+		} else {
 		JButton btnCheckGrade = new JButton("Check grade");
 		btnCheckGrade.setBounds(258, 412, 117, 23);
 		contentPane.add(btnCheckGrade);
+		}
 		} else {
 			JButton btnAddToA = new JButton("Add an AP");
 			

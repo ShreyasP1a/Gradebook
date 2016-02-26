@@ -1,5 +1,6 @@
 package Default;
-import java.awt.List;
+
+import java.util.List;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -74,32 +75,30 @@ public class FileManager {
 	private static final String ADMIN = "ADMINSTRATOR";
 	private static final String TEACHER = "TEACHER";
 
-	//Path to the AP List
+	// Path to the AP List
 	private static final Path PATH_AP_LIST = Paths.get("/Gradebook intensity/src/APLIST/APLIST.txt");
-	
-//this returns the scanner object of the password txt
+
+	// this returns the scanner object of the password txt
 	public static Scanner getPasswordFile(String person) {
 		try {
 			Scanner scannerStudentPassword = new Scanner(PATH_STUDENT_PASSWORD_TXT);
 			Scanner scannerTeacherPassword = new Scanner(PATH_TEACHER_PASSWORD_TXT);
 			Scanner scannerAdminPassword = new Scanner(PATH_ADMINSTRATOR_PASSWORD_TXT);
-		
-			if(person.equalsIgnoreCase(STUDENT)) {
+
+			if (person.equalsIgnoreCase(STUDENT)) {
 				return scannerStudentPassword;
-			} else if(person.equalsIgnoreCase(ADMIN)) {
+			} else if (person.equalsIgnoreCase(ADMIN)) {
 				return scannerAdminPassword;
 			} else {
 				return scannerTeacherPassword;
 			}
-			
 
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Password File not found!");
 		}
-		
-		
+
 		return null;
-	//end getPasswordFile	
+		// end getPasswordFile
 	}
 
 	public FileManager() {
@@ -131,10 +130,9 @@ public class FileManager {
 
 	}
 	/*
-	 * PRE-INITIAZATION 
-	 * The purpose of this method is the create the gradebook folder along with
-	 * the folders: teacher, student, and admin This method will only run if
-	 * gradebook is not there.
+	 * PRE-INITIAZATION The purpose of this method is the create the gradebook
+	 * folder along with the folders: teacher, student, and admin This method
+	 * will only run if gradebook is not there.
 	 */
 
 	public void preInit() {
@@ -175,20 +173,19 @@ public class FileManager {
 		}
 
 		System.out.println("Pre init check done all up to date!");
-		
-		//test for check login
-		
-			checkLogin("stanton", "test", "CleverFlames");
+
+		// test for check login
+
+		checkLogin("stanton", "test", "CleverFlames");
 
 		// end PreInit
 	}
-	
-	
-// This will create the folders for each account
-// this will be run everytime some one creates an account
-// the password will also be added to the database
-// Student will get a folder with their classes, another folder for their
-// grades
+
+	// This will create the folders for each account
+	// this will be run everytime some one creates an account
+	// the password will also be added to the database
+	// Student will get a folder with their classes, another folder for their
+	// grades
 
 	public void createAccountFileFolder(String account, String name, String password, String userName) {
 
@@ -207,9 +204,9 @@ public class FileManager {
 				Files.createDirectories(classes);
 				Files.createDirectories(apExams);
 			} catch (IOException e) {
-				
+
 				e.printStackTrace();
-			}		
+			}
 
 			// end student
 		}
@@ -252,7 +249,7 @@ public class FileManager {
 		// end createAccountFolders
 	}
 
-// This will write to password database
+	// This will write to password database
 	public void writePasswordToDataBase(String account, String userName, String password, String name) {
 		// student
 		// open the student password database file
@@ -303,417 +300,420 @@ public class FileManager {
 		// end passwordToDatabase
 	}
 
-	
-	
-	
-// whenever some one login this check if their passwords match
-// This method is all done
+	// whenever some one login this check if their passwords match
+	// This method is all done
 	public static boolean checkLogin(String password, String userName, String person) {
-		//Input the files into scanner in order to read the passwords
-		//try and catch also there to catch an error in order to make sure that there is an acutual file
-		
-			try {
-				//Check if person is student 
-				if(person.equalsIgnoreCase("student")) {
-						ArrayList<String> studentPassword = new ArrayList();
-						Scanner inputStudentPasswordFile = new Scanner(PATH_STUDENT_PASSWORD_TXT);
-						String[] wordSplit;
-						
-						while(inputStudentPasswordFile.hasNext()) {
-							studentPassword.add(inputStudentPasswordFile.nextLine()); 
-						}
-						 
-						for(String a : studentPassword) {
-							wordSplit = a.split("\\s+");
-							
-							if(userName.equalsIgnoreCase(wordSplit[0])) {
-							
-								if(password.equals(wordSplit[1])) {
-								
-									return true;
-			
-								} else {
-									return false;
-								}
-							}	
-						}
-						
-						inputStudentPasswordFile.close();
-				//end student password check
-				}else if(person.equalsIgnoreCase("teacher")) {
-					Scanner inputTeacherPasswordFile = new Scanner(PATH_TEACHER_PASSWORD_TXT);
-					ArrayList<String> teacherPassword = new ArrayList();
-					String[] wordSplit;
-					
-					while(inputTeacherPasswordFile.hasNext()) {
-						teacherPassword.add(inputTeacherPasswordFile.nextLine()); 
-					} 
-					
-					for(String a : teacherPassword) {
-						wordSplit = a.split("\\s+");
-						
-						if(userName.equalsIgnoreCase(wordSplit[0])) {
-						
-							if(password.equals(wordSplit[1])) {
-							
-								return true;
-		
-							} else {
-								return false;
-							}
-						}	
-					}
-					
-					inputTeacherPasswordFile.close();
-				//end teacher password check	
-				} else {
-					Scanner inputAdminstratorPasswordFile = new Scanner(PATH_ADMINSTRATOR_PASSWORD_TXT);
-					ArrayList<String> adminPassword = new ArrayList();
-					String[] wordSplit;
-					
-					while(inputAdminstratorPasswordFile.hasNext()) {
-						adminPassword.add(inputAdminstratorPasswordFile.nextLine()); 
-					} 
-					
-					for(String a : adminPassword) {
-						wordSplit = a.split("\\s+");
-						
-						if(userName.equalsIgnoreCase(wordSplit[0])) {
-						
-							if(password.equals(wordSplit[1])) {
-							
-								return true;
-		
-							} else {
-								return false;
-							}
-						}	
-					}
-					inputAdminstratorPasswordFile.close();
-				//end admin password check	
-					
-					
+		// Input the files into scanner in order to read the passwords
+		// try and catch also there to catch an error in order to make sure that
+		// there is an acutual file
+
+		try {
+			// Check if person is student
+			if (person.equalsIgnoreCase("student")) {
+				ArrayList<String> studentPassword = new ArrayList();
+				Scanner inputStudentPasswordFile = new Scanner(PATH_STUDENT_PASSWORD_TXT);
+				String[] wordSplit;
+
+				while (inputStudentPasswordFile.hasNext()) {
+					studentPassword.add(inputStudentPasswordFile.nextLine());
 				}
-			} catch (IOException e) {
-				System.out.println("Files not Found");
-				e.printStackTrace();
+
+				for (String a : studentPassword) {
+					wordSplit = a.split("\\s+");
+
+					if (userName.equalsIgnoreCase(wordSplit[0])) {
+
+						if (password.equals(wordSplit[1])) {
+
+							return true;
+
+						} else {
+							return false;
+						}
+					}
+				}
+
+				inputStudentPasswordFile.close();
+				// end student password check
+			} else if (person.equalsIgnoreCase("teacher")) {
+				Scanner inputTeacherPasswordFile = new Scanner(PATH_TEACHER_PASSWORD_TXT);
+				ArrayList<String> teacherPassword = new ArrayList();
+				String[] wordSplit;
+
+				while (inputTeacherPasswordFile.hasNext()) {
+					teacherPassword.add(inputTeacherPasswordFile.nextLine());
+				}
+
+				for (String a : teacherPassword) {
+					wordSplit = a.split("\\s+");
+
+					if (userName.equalsIgnoreCase(wordSplit[0])) {
+
+						if (password.equals(wordSplit[1])) {
+
+							return true;
+
+						} else {
+							return false;
+						}
+					}
+				}
+
+				inputTeacherPasswordFile.close();
+				// end teacher password check
+			} else {
+				Scanner inputAdminstratorPasswordFile = new Scanner(PATH_ADMINSTRATOR_PASSWORD_TXT);
+				ArrayList<String> adminPassword = new ArrayList();
+				String[] wordSplit;
+
+				while (inputAdminstratorPasswordFile.hasNext()) {
+					adminPassword.add(inputAdminstratorPasswordFile.nextLine());
+				}
+
+				for (String a : adminPassword) {
+					wordSplit = a.split("\\s+");
+
+					if (userName.equalsIgnoreCase(wordSplit[0])) {
+
+						if (password.equals(wordSplit[1])) {
+
+							return true;
+
+						} else {
+							return false;
+						}
+					}
+				}
+				inputAdminstratorPasswordFile.close();
+				// end admin password check
+
 			}
-		
-	
-			return false;		
+		} catch (IOException e) {
+			System.out.println("Files not Found");
+			e.printStackTrace();
+		}
+
+		return false;
 	}
 
-	
-//this method is to get the name of the person logging into the system can also be used in other parts of the program	
+	// this method is to get the name of the person logging into the system can
+	// also be used in other parts of the program
 	public String getNameFromUserName(String userName, String person) {
-		if(person.equalsIgnoreCase("student")) {
+		if (person.equalsIgnoreCase("student")) {
 			ArrayList<String> studentName = new ArrayList();
 			Scanner inputStudentPasswordFile;
 			String[] wordSplit;
 			try {
 				inputStudentPasswordFile = new Scanner(PATH_STUDENT_PASSWORD_TXT);
-				while(inputStudentPasswordFile.hasNext()) {
-					studentName.add(inputStudentPasswordFile.nextLine()); 
+				while (inputStudentPasswordFile.hasNext()) {
+					studentName.add(inputStudentPasswordFile.nextLine());
 				}
-							for(String a : studentName) {
+				for (String a : studentName) {
 					wordSplit = a.split("\\s+");
-					if(userName.equalsIgnoreCase(wordSplit[0])) {
-					
-							return wordSplit[2];
+					if (userName.equalsIgnoreCase(wordSplit[0])) {
+
+						return wordSplit[2];
 					}
-				
+
 				}
-		inputStudentPasswordFile.close();
-	//end student	
+				inputStudentPasswordFile.close();
+				// end student
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-	
-	} else if(person.equalsIgnoreCase("teacher")) {
-		ArrayList<String> teacherName = new ArrayList();
-		Scanner inputTeacherPasswordFile;
-		String[] wordSplit;
-		try {
-			inputTeacherPasswordFile = new Scanner(PATH_TEACHER_PASSWORD_TXT);
-			while(inputTeacherPasswordFile.hasNext()) {
-				teacherName.add(inputTeacherPasswordFile.nextLine()); 
-			}
-						for(String a : teacherName) {
-				wordSplit = a.split("\\s+");
-				if(userName.equalsIgnoreCase(wordSplit[0])) {
-				
-						return wordSplit[2];
+
+		} else if (person.equalsIgnoreCase("teacher")) {
+			ArrayList<String> teacherName = new ArrayList();
+			Scanner inputTeacherPasswordFile;
+			String[] wordSplit;
+			try {
+				inputTeacherPasswordFile = new Scanner(PATH_TEACHER_PASSWORD_TXT);
+				while (inputTeacherPasswordFile.hasNext()) {
+					teacherName.add(inputTeacherPasswordFile.nextLine());
 				}
-			
-			}
-	inputTeacherPasswordFile.close();
-//end teacher	
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	} else {
-	//Admin 
-		ArrayList<String> adminName = new ArrayList();
-		Scanner inputAdminPasswordFile;
-		String[] wordSplit;
-		try {
-			inputAdminPasswordFile = new Scanner(PATH_ADMINSTRATOR_PASSWORD_TXT);
-			while(inputAdminPasswordFile.hasNext()) {
-				adminName.add(inputAdminPasswordFile.nextLine()); 
-			}
-						for(String a : adminName) {
-				wordSplit = a.split("\\s+");
-				if(userName.equalsIgnoreCase(wordSplit[0])) {
-				
+				for (String a : teacherName) {
+					wordSplit = a.split("\\s+");
+					if (userName.equalsIgnoreCase(wordSplit[0])) {
+
 						return wordSplit[2];
+					}
+
 				}
-			
+				inputTeacherPasswordFile.close();
+				// end teacher
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-	inputAdminPasswordFile.close();
-//end admin	
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+		} else {
+			// Admin
+			ArrayList<String> adminName = new ArrayList();
+			Scanner inputAdminPasswordFile;
+			String[] wordSplit;
+			try {
+				inputAdminPasswordFile = new Scanner(PATH_ADMINSTRATOR_PASSWORD_TXT);
+				while (inputAdminPasswordFile.hasNext()) {
+					adminName.add(inputAdminPasswordFile.nextLine());
+				}
+				for (String a : adminName) {
+					wordSplit = a.split("\\s+");
+					if (userName.equalsIgnoreCase(wordSplit[0])) {
+
+						return wordSplit[2];
+					}
+
+				}
+				inputAdminPasswordFile.close();
+				// end admin
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
-		
-		
-	}
 		return "";
 	}
 
-	
-//returns an array list containg the all of the names for the each class; teacher and student
-public ArrayList<String> getNamesList(String name) {	
-	ArrayList<String> names = new ArrayList<String>();
-	try {
-		//Check if person is student 
-		if(name.equalsIgnoreCase("student")) {
+	// returns an array list containg the all of the names for the each class;
+	// teacher and student
+	public ArrayList<String> getNamesList(String name) {
+		ArrayList<String> names = new ArrayList<String>();
+		try {
+			// Check if person is student
+			if (name.equalsIgnoreCase("student")) {
 				ArrayList<String> studentInformationList = new ArrayList();
 				Scanner inputStudentPasswordFile = new Scanner(PATH_STUDENT_PASSWORD_TXT);
 				String[] wordSplit;
-				
-				while(inputStudentPasswordFile.hasNext()) {
-					studentInformationList.add(inputStudentPasswordFile.nextLine()); 
+
+				while (inputStudentPasswordFile.hasNext()) {
+					studentInformationList.add(inputStudentPasswordFile.nextLine());
 				}
-				 
-				for(String a : studentInformationList) {
+
+				for (String a : studentInformationList) {
 					wordSplit = a.split("\\s+");
 					names.add(wordSplit[2]);
-				}	
+				}
 				inputStudentPasswordFile.close();
 				return names;
-		//end student	
-		}else if(name.equalsIgnoreCase("teacher")) {
-			Scanner inputTeacherPasswordFile = new Scanner(PATH_TEACHER_PASSWORD_TXT);
-			
-			ArrayList<String> teacherInformationList = new ArrayList();
-			Scanner inputTeacherPasswordFile1 = new Scanner(PATH_TEACHER_PASSWORD_TXT);
-			String[] wordSplit;
-			
-			while(inputTeacherPasswordFile1.hasNext()) {
-				teacherInformationList.add(inputTeacherPasswordFile1.nextLine()); 
-			}
-			 
-			for(String a : teacherInformationList) {
-				wordSplit = a.split("\\s+");
-				names.add(wordSplit[2]);
-			}	
-			inputTeacherPasswordFile1.close();
-			return names;
-			
-		} 
-	} catch (IOException e) {
-		System.out.println("Files not Found");
-		e.printStackTrace();
-	}
-		return names;
-}
+				// end student
+			} else if (name.equalsIgnoreCase("teacher")) {
+				Scanner inputTeacherPasswordFile = new Scanner(PATH_TEACHER_PASSWORD_TXT);
 
+				ArrayList<String> teacherInformationList = new ArrayList();
+				Scanner inputTeacherPasswordFile1 = new Scanner(PATH_TEACHER_PASSWORD_TXT);
+				String[] wordSplit;
 
-
-//returns the arraylist of all of the ap classes from the aplist.txt
-public ArrayList<String> getAllAPClass() {
-
-	ArrayList<String> apList = new ArrayList<String>();
-	
-	try {
-		Scanner input = new Scanner(PATH_AP_LIST.toFile());
-		while(input.hasNext()) {
-			apList.add(input.nextLine());
-		}
-		return apList;
-		
-	} catch (FileNotFoundException e) {
-		
-		e.printStackTrace();
-	}
-	
-	return apList;
-	}
-
-
-
-//this method writes all of the ap exams to apExams.txt in their respective student folder
-//this gets parameters from the ap class
-
-public void writeApExamsToPerson(String userName, java.util.List selectedValuesList) {
-	System.out.println(userName);
-	int a;
-	 a = JOptionPane.showConfirmDialog(null, "Are you sure this is all of the APs that this student is going to take?");
-	 if(a ==0){
-		 
-		 PrintWriter writer;
-		try {
-			File f = new File(PATH_STUDENT + "/" + userName + "/ap exams/apExams.txt");
-			
-			if (!f.exists()) {
-				// Create the file
-				f.createNewFile();
-				
-			}
-			writer = new PrintWriter(f, "UTF-8");
-			
-			Object[] array = ((java.util.List<String>) selectedValuesList).toArray();
-
-			System.out.println("*** iterating over the array ***");
-			for (Object str : array) {
-				
-				writer.print(str);
-				writer.println();
-				
-			}
-			
-			
-			writer.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	
-		
-	 }else {
-		 
-	 }
-	}
-
-
-
-//This method gets the userName from the Name
-public String getUserNameFromName(String name, String person) {
-	if(person.equalsIgnoreCase("student")) {
-		ArrayList<String> studentName = new ArrayList();
-		Scanner inputStudentPasswordFile;
-		String[] wordSplit;
-		try {
-			inputStudentPasswordFile = new Scanner(PATH_STUDENT_PASSWORD_TXT);
-			while(inputStudentPasswordFile.hasNext()) {
-				studentName.add(inputStudentPasswordFile.nextLine()); 
-			}
-						for(String a : studentName) {
-				wordSplit = a.split("\\s+");
-				if(name.equalsIgnoreCase(wordSplit[2])) {
-				
-						return wordSplit[0];
+				while (inputTeacherPasswordFile1.hasNext()) {
+					teacherInformationList.add(inputTeacherPasswordFile1.nextLine());
 				}
-			
+
+				for (String a : teacherInformationList) {
+					wordSplit = a.split("\\s+");
+					names.add(wordSplit[2]);
+				}
+				inputTeacherPasswordFile1.close();
+				return names;
+
 			}
-	inputStudentPasswordFile.close();
-//end student	
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Files not Found");
 			e.printStackTrace();
 		}
-		
-
-} else if(person.equalsIgnoreCase("teacher")) {
-	ArrayList<String> teacherName = new ArrayList();
-	Scanner inputTeacherPasswordFile;
-	String[] wordSplit;
-	try {
-		inputTeacherPasswordFile = new Scanner(PATH_TEACHER_PASSWORD_TXT);
-		while(inputTeacherPasswordFile.hasNext()) {
-			teacherName.add(inputTeacherPasswordFile.nextLine()); 
-		}
-					for(String a : teacherName) {
-			wordSplit = a.split("\\s+");
-			if(name.equalsIgnoreCase(wordSplit[2])) {
-			
-					return wordSplit[0];
-			}
-		
-		}
-inputTeacherPasswordFile.close();
-//end teacher	
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+		return names;
 	}
-	
-} else {
-//Admin 
-	ArrayList<String> adminName = new ArrayList();
-	Scanner inputAdminPasswordFile;
-	String[] wordSplit;
-	try {
-		inputAdminPasswordFile = new Scanner(PATH_ADMINSTRATOR_PASSWORD_TXT);
-		while(inputAdminPasswordFile.hasNext()) {
-			adminName.add(inputAdminPasswordFile.nextLine()); 
-		}
-					for(String a : adminName) {
-			wordSplit = a.split("\\s+");
-			if(name.equalsIgnoreCase(wordSplit[2])) {
-			
-					return wordSplit[0];
-			}
-		
-		}
-inputAdminPasswordFile.close();
-//end admin	
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	
-	
-}
-	return "";
-	
-	
-}
 
-//This method will return the list of all of the ap classes that a student is taking
-//The method takes in the userName parameter
-public ArrayList<String>  getApList(String userName){
-	ArrayList<String> apList = new ArrayList<String>();
-	Path apPath = Paths.get(PATH_STUDENT + "/" + userName + "/ap exams/apExams.txt");
-	
+	// returns the arraylist of all of the ap classes from the aplist.txt
+	public ArrayList<String> getAllAPClass() {
+
+		ArrayList<String> apList = new ArrayList<String>();
+
 		try {
-			Scanner input = new Scanner(apPath.toFile());
-			
-			while(input.hasNextLine()) {
+			Scanner input = new Scanner(PATH_AP_LIST.toFile());
+			while (input.hasNext()) {
 				apList.add(input.nextLine());
 			}
-		input.close();
+			return apList;
+
+		} catch (FileNotFoundException e) {
+
+			e.printStackTrace();
+		}
+
 		return apList;
+	}
+
+	// this method writes all of the ap exams to apExams.txt in their respective
+	// student folder
+	// this gets parameters from the ap class
+
+	public void writeApExamsToPerson(String userName, java.util.List selectedValuesList) {
+		System.out.println(userName);
+		int a;
+		a = JOptionPane.showConfirmDialog(null,
+				"Are you sure this is all of the APs that this student is going to take? side note adding more Ap's to the same student will start over");
+		if (a == 0) {
+
+			PrintWriter writer;
+			try {
+				File f = new File(PATH_STUDENT + "/" + userName + "/ap exams/apExams.txt");
+
+				if (!f.exists()) {
+					// Create the file
+					f.createNewFile();
+
+				}
+				writer = new PrintWriter(f, "UTF-8");
+
+				Object[] array = ((java.util.List<String>) selectedValuesList).toArray();
+
+				System.out.println("*** iterating over the array ***");
+				for (Object str : array) {
+
+					writer.print(str);
+					writer.println();
+
+				}
+
+				writer.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		} else {
+
+		}
+	}
+
+	// This method gets the userName from the Name
+	public String getUserNameFromName(String name, String person) {
+		if (person.equalsIgnoreCase("student")) {
+			ArrayList<String> studentName = new ArrayList();
+			Scanner inputStudentPasswordFile;
+			String[] wordSplit;
+			try {
+				inputStudentPasswordFile = new Scanner(PATH_STUDENT_PASSWORD_TXT);
+				while (inputStudentPasswordFile.hasNext()) {
+					studentName.add(inputStudentPasswordFile.nextLine());
+				}
+				for (String a : studentName) {
+					wordSplit = a.split("\\s+");
+					if (name.equalsIgnoreCase(wordSplit[2])) {
+
+						return wordSplit[0];
+					}
+
+				}
+				inputStudentPasswordFile.close();
+				// end student
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} else if (person.equalsIgnoreCase("teacher")) {
+			ArrayList<String> teacherName = new ArrayList();
+			Scanner inputTeacherPasswordFile;
+			String[] wordSplit;
+			try {
+				inputTeacherPasswordFile = new Scanner(PATH_TEACHER_PASSWORD_TXT);
+				while (inputTeacherPasswordFile.hasNext()) {
+					teacherName.add(inputTeacherPasswordFile.nextLine());
+				}
+				for (String a : teacherName) {
+					wordSplit = a.split("\\s+");
+					if (name.equalsIgnoreCase(wordSplit[2])) {
+
+						return wordSplit[0];
+					}
+
+				}
+				inputTeacherPasswordFile.close();
+				// end teacher
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} else {
+			// Admin
+			ArrayList<String> adminName = new ArrayList();
+			Scanner inputAdminPasswordFile;
+			String[] wordSplit;
+			try {
+				inputAdminPasswordFile = new Scanner(PATH_ADMINSTRATOR_PASSWORD_TXT);
+				while (inputAdminPasswordFile.hasNext()) {
+					adminName.add(inputAdminPasswordFile.nextLine());
+				}
+				for (String a : adminName) {
+					wordSplit = a.split("\\s+");
+					if (name.equalsIgnoreCase(wordSplit[2])) {
+
+						return wordSplit[0];
+					}
+
+				}
+				inputAdminPasswordFile.close();
+				// end admin
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		return "";
+
+	}
+
+	// This method will return the list of all of the ap classes that a student
+	// is taking
+	// The method takes in the userName parameter
+	public ArrayList<String> getApList(String userName) {
+		ArrayList<String> apList = new ArrayList<String>();
+		Path apPath = Paths.get(PATH_STUDENT + "/" + userName + "/ap exams/apExams.txt");
+
+		try {
+			Scanner input = new Scanner(apPath.toFile());
+
+			while (input.hasNextLine()) {
+				apList.add(input.nextLine());
+			}
+			input.close();
+			return apList;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-	
-		
-	
-	
-	return apList;
-}
-}
 
+		return apList;
+	}
+
+	// This method will create the class and add it to the teacher folder and
+	// also add students to it and also in the student file
+	
+	public void createClass(String nameOfClass, String nameOfTeacher, List students){
+		int i =0;
+		String[] studentsName = new String[students.size()];
+		students.toArray(studentsName);	
+		
+		String[] studentUserNames = new String[studentsName.length];
+		
+		String userNameOfTeacher = getUserNameFromName(nameOfTeacher, "teacher");
+	//converts all of the students names in the list to the userNames for each one so that I can add them to the class.
+		for(String a : studentsName) {
+		studentUserNames[i] = getUserNameFromName(studentsName[i], "student");
+			i++;
+		}
+		
+		
+		JOptionPane.showMessageDialog(null, "Class created!");
+	}
+	
+}

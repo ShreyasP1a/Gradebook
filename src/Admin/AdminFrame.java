@@ -48,7 +48,8 @@ public class AdminFrame extends JFrame {
 		JButton btnAllStudents = new JButton("All Students");
 		btnAllStudents.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new StudentLists(0);
+				new StudentLists(0, false, "", "");
+					
 			}
 		});
 		btnAllStudents.setBounds(48, 157, 159, 23);
@@ -66,7 +67,7 @@ public class AdminFrame extends JFrame {
 		JButton btnSechduleApExams = new JButton("Schedule AP Exams");
 		btnSechduleApExams.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new StudentLists(1);
+				new StudentLists(1, false, "", "");
 			}
 		});
 		btnSechduleApExams.setBounds(48, 258, 159, 23);

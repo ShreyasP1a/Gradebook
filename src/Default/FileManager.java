@@ -790,4 +790,19 @@ public class FileManager {
 			return nameOfClasses;
 	
 	}
+
+	public ArrayList<String> getClassListForTeacher(String name) {
+		ArrayList<String> nameOfClasses = new ArrayList<String>();
+		
+		String userName = getUserNameFromName(name, "teacher");
+		
+		File f = new File(PATH_TEACHER + "/" + userName + "/classes/");
+		
+		 nameOfClasses = new ArrayList<String>(Arrays.asList(f.list()));
+		
+		
+		
+		return nameOfClasses;
+		
+	}
 }

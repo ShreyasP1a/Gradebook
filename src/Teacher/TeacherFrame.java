@@ -49,6 +49,11 @@ public class TeacherFrame extends JFrame {
 		contentPane.add(label_1);
 		
 		JButton btnAllTeachers = new JButton("All Classes");
+		btnAllTeachers.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ClassList(name);
+			}
+		});
 		btnAllTeachers.setBounds(10, 172, 253, 23);
 		contentPane.add(btnAllTeachers);
 		

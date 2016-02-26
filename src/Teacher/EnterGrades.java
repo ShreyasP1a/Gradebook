@@ -97,10 +97,7 @@ public class EnterGrades extends JFrame {
 //					 
 //				 } 	
 	    		 
-	    		 for(int i =0; i < model.getColumnCount(); i ++) {
-	    			 System.out.print(model.getColumnName(i) + " ");
-	    			 model.setValueAt("43", i, 1);
-	    		 }
+	    		 
 	    	}		
 	    });
 	    panel.add(btnNewButton_1, "cell 1 0");

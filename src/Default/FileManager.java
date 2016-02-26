@@ -1,6 +1,5 @@
 package Default;
 
-import java.util.List;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,9 +11,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
+
+import Admin.StudentLists;
 
 public class FileManager {
 	/*
@@ -700,20 +703,91 @@ public class FileManager {
 	
 	public void createClass(String nameOfClass, String nameOfTeacher, List students){
 		int i =0;
+		String userNameOfTeacher = getUserNameFromName(nameOfTeacher, "teacher");
+		
+		
 		String[] studentsName = new String[students.size()];
 		students.toArray(studentsName);	
-		
 		String[] studentUserNames = new String[studentsName.length];
 		
-		String userNameOfTeacher = getUserNameFromName(nameOfTeacher, "teacher");
-	//converts all of the students names in the list to the userNames for each one so that I can add them to the class.
+		//converts all of the students names in the list to the userNames for each one so that I can add them to the class.
+		
 		for(String a : studentsName) {
 		studentUserNames[i] = getUserNameFromName(studentsName[i], "student");
-			i++;
+		i++;
 		}
 		
+		for(int j = 0; j < studentUserNames.length;j++) {
+			String userName = studentUserNames[j];
+			
+			Path pathStudentClass = Paths.get(PATH_STUDENT + "/" + userName + "/classes/" + nameOfClass);
+			Path pathStudentClassGrades = Paths.get(PATH_STUDENT + "/" + userName + "/classes/" + nameOfClass+"/grades.txt");
+			
+			
+			
+			try {
+				Files.deleteIfExists(pathStudentClass);
+				Files.createDirectories(pathStudentClass);
+				Files.createFile(pathStudentClassGrades);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+			}
+		}
+		
+		Path pathTeacherClass = Paths.get(PATH_TEACHER + "/" + userNameOfTeacher + "/classes/" + nameOfClass);
+		Path pathTeacherClassStudents = Paths.get(PATH_TEACHER + "/" + userNameOfTeacher + "/classes/" + nameOfClass+"/students.txt");
+		Path pathTeacherClassGrades = Paths.get(PATH_TEACHER + "/" + userNameOfTeacher + "/classes/" + nameOfClass+"/Grades.txt");
+		Path pathTeacherClassAssignmentList = Paths.get(PATH_TEACHER + "/" + userNameOfTeacher + "/classes/" + nameOfClass+"/Assignments.txt");
+		
+		try {
+			Files.deleteIfExists(pathTeacherClass);
+			
+			Files.createDirectories(pathTeacherClass);
+			Files.createFile(pathTeacherClassGrades);
+			Files.createFile(pathTeacherClassStudents);
+			Files.createFile(pathTeacherClassAssignmentList);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		PrintWriter writer;
+		try {
+			File f = new File(PATH_TEACHER + "/" + userNameOfTeacher + "/classes/" + nameOfClass+"/students.txt");
+
+			
+			writer = new PrintWriter(f, "UTF-8");
+
+			for(String a : studentUserNames){
+				writer.print(a);
+				writer.println();
+			}
+			writer.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	
 		
 		JOptionPane.showMessageDialog(null, "Class created!");
 	}
 	
+	public ArrayList<String> getClassListForStudent(String name)	{
+			ArrayList<String> nameOfClasses = new ArrayList<String>();
+			String userName = getUserNameFromName(name, "student");
+			
+			File f = new File(PATH_STUDENT + "/" + userName + "/classes/");
+			
+			 nameOfClasses = new ArrayList<String>(Arrays.asList(f.list()));
+			
+			
+			
+			return nameOfClasses;
+	
+	}
 }

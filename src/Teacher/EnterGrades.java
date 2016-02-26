@@ -50,6 +50,9 @@ public class EnterGrades extends JFrame {
 
 	    // Append a new column with copied data
 	    model.addColumn("Students");
+	   
+	    
+	   
 	    
 	    model.addRow(new Object[] { "Shreyas" });
 	    model.addRow(new Object[] { "Kunal" });
@@ -71,11 +74,10 @@ public class EnterGrades extends JFrame {
 	    JButton btnNewButton = new JButton("Add Grade");
 	    btnNewButton.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent arg0) {
-	    		Vector data = model.getDataVector();
-				 Vector row = (Vector) data.elementAt(0);
-				 System.out.println(row.elementAt(0));
-	    		String name = JOptionPane.showInputDialog("What is the name of the assignment?");
+	    		
+	    		String name = JOptionPane.showInputDialog("What is the name of the assignments?");
 	    		model.addColumn(name);
+	    		
 	    		
 	    	}
 	    });
@@ -84,51 +86,21 @@ public class EnterGrades extends JFrame {
 	    JButton btnNewButton_1 = new JButton("save");
 	    btnNewButton_1.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
-	    		PrintWriter writer;
-				try {
-					File f = new File("/test.txt");
 
-					if (!f.exists()) {
-						// Create the file
-						f.createNewFile();
-
-					}
-					writer = new PrintWriter(f, "UTF-8");
-
+	    		 Vector data = model.getDataVector();			
 					
-
-					System.out.println("*** iterating over the array ***");
-					
-					 Vector data = model.getDataVector();
-					 Vector row = (Vector) data.elementAt(1);
-					 for(int i =0; i < table.getColumnCount(); i++) {
-						 System.out.println(row.elementAt(i));
-					 }
-
-//					    int mColIndex = 0;
-//					    List colData = new ArrayList(table.getRowCount());
-//					    for (int i = 0; i < table.getRowCount(); i++) {
-//					      row = (Vector) data.elementAt(i);
-//					      colData.add(row.get(mColIndex));
-//					    }
-					 
-						
-						writer.println();
-
-					
-					writer.close();
-	    	}
-	    	 catch (FileNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (UnsupportedEncodingException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} 
-				
+//				 for(int i = 0; i < model.getRowCount(); i++) {
+//					 for(int j =0; j< model.getColumnCount(); j++){
+//						System.out.print(((Vector) model.getDataVector().elementAt(i)).elementAt(j) + " ");
+//					 }	
+//					 System.out.println();
+//					 
+//				 } 	
+	    		 
+	    		 for(int i =0; i < model.getColumnCount(); i ++) {
+	    			 System.out.print(model.getColumnName(i) + " ");
+	    			 model.setValueAt("43", i, 1);
+	    		 }
 	    	}		
 	    });
 	    panel.add(btnNewButton_1, "cell 1 0");

@@ -101,6 +101,7 @@ public class StudentLists extends JFrame {
 			
 			public void actionPerformed(ActionEvent arg0) {
 				file.createClass(nameOfClass, teacherName, selectedValuesList);
+				dispose();
 			}
 		});
 		contentPane.add(btnAddToAClass);
@@ -133,8 +134,13 @@ public class StudentLists extends JFrame {
 			contentPane.add(btnAddToA);
 			
 		}
+
+		
 		
 		setVisible(true);
 		setLocationRelativeTo(null);
+	}
+	public void destroy(){
+		dispose();
 	}
 }

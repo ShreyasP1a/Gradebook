@@ -51,7 +51,7 @@ public class TeacherFrame extends JFrame {
 		JButton btnAllTeachers = new JButton("All Classes");
 		btnAllTeachers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new ClassList(name);
+				new ClassListTeacher(name);
 			}
 		});
 		btnAllTeachers.setBounds(10, 172, 253, 23);

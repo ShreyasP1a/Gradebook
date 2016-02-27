@@ -20,14 +20,14 @@ import javax.swing.border.EmptyBorder;
 
 import Default.FileManager;
 
-public class ClassList extends JFrame {
+public class ClassListStudent extends JFrame {
 
 	private DefaultListModel listModel;
 	private FileManager file = new FileManager();
 	private JPanel contentPane;
 
 	
-	public ClassList(String name) {
+	public ClassListStudent(String name) {
 		setBounds(100, 100, 401, 487);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();

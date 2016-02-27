@@ -1,4 +1,4 @@
-package Default;
+ package Default;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -761,6 +761,7 @@ public class FileManager {
 			for(String a : studentUserNames){
 				writer.print(a);
 				writer.println();
+				
 			}
 			writer.close();
 		} catch (FileNotFoundException e) {
@@ -784,9 +785,6 @@ public class FileManager {
 			File f = new File(PATH_STUDENT + "/" + userName + "/classes/");
 			
 			 nameOfClasses = new ArrayList<String>(Arrays.asList(f.list()));
-			
-			
-			
 			return nameOfClasses;
 	
 	}
@@ -803,6 +801,37 @@ public class FileManager {
 		
 		
 		return nameOfClasses;
+		
+	}
+	
+	public ArrayList<String> getListOfStudentsInClassForTeacher(String nameOfClass, String name) {
+		ArrayList<String> listOfStudentsInClass = new ArrayList();
+		
+		String userName = getUserNameFromName(name, "teacher");
+		
+		Path pathOfClassList = Paths.get(PATH_TEACHER + "/" + userName + "/classes/" + nameOfClass + "/students.txt");
+		
+		try {
+			Scanner input = new Scanner(pathOfClassList.toFile());
+			
+			while(input.hasNextLine()) {
+				listOfStudentsInClass.add(input.nextLine());
+			}
+		input.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return listOfStudentsInClass;
+	}
+
+	public void writeAssignmentsToClass(ArrayList<String> nameOfAssignments, String userName , String nameOfClass) throws FileNotFoundException {
+		Path pathsForAssignments = Paths.get(PATH_TEACHER + "/" + userName + "/classes/" + nameOfClass + "/students.txt");
+		
+		Scanner input = new Scanner(pathsForAssignments.toFile());
+		
+		
 		
 	}
 }

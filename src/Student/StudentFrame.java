@@ -47,7 +47,7 @@ public class StudentFrame extends JFrame {
 		JButton btnNewButton = new JButton("Check your Grades");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-					new ClassList(Name);
+					new ClassListStudent(Name);
 			}
 		});
 		btnNewButton.setBounds(10, 142, 403, 23);

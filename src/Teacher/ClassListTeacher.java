@@ -20,14 +20,14 @@ import javax.swing.border.EmptyBorder;
 
 import Default.FileManager;
 
-public class ClassList extends JFrame {
+public class ClassListTeacher extends JFrame {
 
 	private DefaultListModel listModel;
 	private FileManager file = new FileManager();
 	private JPanel contentPane;
 
 	
-	public ClassList(String name) {
+	public ClassListTeacher(String name) {
 		setBounds(100, 100, 401, 487);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
@@ -46,7 +46,7 @@ public class ClassList extends JFrame {
 
 		listModel = new DefaultListModel();
 
-		ArrayList<String> namesOfClass = file.getClassListForStudent(name);
+		ArrayList<String> namesOfClass = file.getClassListForTeacher(name);
 		
 		final String[] classList = namesOfClass.toArray(new String[0]);
 		
@@ -67,13 +67,14 @@ public class ClassList extends JFrame {
 		btnCancel.setBounds(10, 412, 89, 23);
 		contentPane.add(btnCancel);
 		
-		JButton btnCheckGradeFor = new JButton("Enter grade for class");
+		JButton btnCheckGradeFor = new JButton("Enter grades for class");
 		btnCheckGradeFor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				new EnterGrades((String)listModel.getElementAt(list.getSelectedIndex()), name);
 				
 			}
 		});
-		btnCheckGradeFor.setBounds(240, 412, 135, 23);
+		btnCheckGradeFor.setBounds(215, 412, 160, 23);
 		contentPane.add(btnCheckGradeFor);
 		setVisible(true);
 		setLocationRelativeTo(null);

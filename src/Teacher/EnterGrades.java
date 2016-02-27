@@ -1,25 +1,19 @@
 package Teacher;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Vector;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.awt.event.ActionEvent;
-import javax.swing.ScrollPaneConstants;
+
+import Default.FileManager;
 import net.miginfocom.swing.MigLayout;
 
 public class EnterGrades extends JFrame {
@@ -31,11 +25,36 @@ public class EnterGrades extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EnterGrades() {
+	public EnterGrades(String nameOfClass, String name) {
+		
+		FileManager file = new FileManager();
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		DefaultTableModel model = new DefaultTableModel();
 	    JTable table = new JTable(model);
 	    table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+	    
+	  
+	    model.addColumn("Students");
+	    ArrayList<String> listOfStudent = new ArrayList();
+	   
+	   listOfStudent = file.getListOfStudentsInClassForTeacher(nameOfClass, name);
+	   
+	   String[] listOfStudentsUserNames = listOfStudent.toArray(new String[0]);
+	   
+	  String[] listOfStudents = new String[listOfStudentsUserNames.length];
+	  
+	 int l = 0;
+	  for(String a : listOfStudentsUserNames) {
+		  listOfStudents[l] = file.getNameFromUserName(listOfStudentsUserNames[l], "student");
+		   l++;
+	   }
+	  
+	   for(String a : listOfStudents) {
+		   model.addRow(new Object[] {a});
+		   
+	   }
+	   
+	    
 	    
 	    
 //	    Vector data = model.getDataVector();
@@ -49,16 +68,12 @@ public class EnterGrades extends JFrame {
 //	    }
 
 	    // Append a new column with copied data
-	    model.addColumn("Students");
+	   
 	   
 	    
 	   
 	    
-	    model.addRow(new Object[] { "Shreyas" });
-	    model.addRow(new Object[] { "Kunal" });
-	    model.addRow(new Object[] { "Frank" });
-	    model.addRow(new Object[] { "Shravan" });
-	    model.addRow(new Object[] { "Julian" });
+	   
 	    
 	    
 	    setSize(1421, 618);

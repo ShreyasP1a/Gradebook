@@ -826,12 +826,66 @@ public class FileManager {
 		return listOfStudentsInClass;
 	}
 
-	public void writeAssignmentsToClass(ArrayList<String> nameOfAssignments, String userName , String nameOfClass) throws FileNotFoundException {
-		Path pathsForAssignments = Paths.get(PATH_TEACHER + "/" + userName + "/classes/" + nameOfClass + "/students.txt");
+	public void writeAssignmentsToClass(ArrayList<String> nameOfAssignments, String name , String nameOfClass) throws IOException {
 		
-		Scanner input = new Scanner(pathsForAssignments.toFile());
+		String userName = getUserNameFromName(name, "teacher");
+		Path pathsForAssignments = Paths.get(PATH_TEACHER + "/" + userName + "/classes/" + nameOfClass + "/Assignments.txt");
+		
+		File f = pathsForAssignments.toFile();
+		
+		if(f.exists()) {
+			f.delete();
+		}
+		final String[] assignmentLists = nameOfAssignments.toArray(new String[0]);
+		f.createNewFile();
+		
+		PrintWriter writer;
+		
+		writer = new PrintWriter(f, "UTF-8");
+		
+		for(String a : assignmentLists) {
+			writer.print(a);
+			writer.println();
+		}
+		writer.close();		
+	}
+// Add students too!
+	public void writeGradesToFile(String[] grades, String nameOfClass, String name) throws IOException{
+		String userName = getUserNameFromName(name, "teacher");
+		Path pathsForGrades = Paths.get(PATH_TEACHER + "/" + userName + "/classes/" + nameOfClass + "/Grades.txt");
+		
+		File f = pathsForGrades.toFile();
+		
+		f.createNewFile();
+		
+		PrintWriter writer;
+		
+		writer = new PrintWriter(f, "UTF-8");
+		
+		for(String a : grades) {
+			writer.print(a);
+			writer.println();
+		}
+		writer.close();		
+		
+		
 		
 		
 		
 	}
+	
+	public ArrayList<String> getAssignmentList(String nameOfClass, String name) throws FileNotFoundException {
+		String userName = getUserNameFromName(name, "teacher");
+		ArrayList<String> nameList = new ArrayList();
+		
+		File f = new File(PATH_TEACHER + "/" + userName + "/classes/" + nameOfClass + "/Assignments.txt");
+		
+		Scanner input = new Scanner(f);
+		
+		while(input.hasNextLine()) {
+			nameList.add(input.nextLine());
+		}
+		return nameList;
+	}
+
 }

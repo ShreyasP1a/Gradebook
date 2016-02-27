@@ -2,6 +2,8 @@ package Teacher;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -49,6 +51,8 @@ public class EnterGrades extends JFrame {
 		   l++;
 	   }
 	  
+	  
+	  
 	   for(String a : listOfStudents) {
 		   model.addRow(new Object[] {a});
 		   
@@ -68,6 +72,28 @@ public class EnterGrades extends JFrame {
 //	    }
 
 	    // Append a new column with copied data
+	   
+	   
+	   ArrayList<String> nameList = new ArrayList();
+	   
+	   try {
+		nameList = file.getAssignmentList(nameOfClass, name);
+		
+		final String[] nameLists = nameList.toArray(new String[0]);
+		
+		for(String a : nameLists) {
+			model.addColumn(a);
+		}
+		
+		
+	} catch (FileNotFoundException e2) {
+		// TODO Auto-generated catch block
+		e2.printStackTrace();
+	}
+	   
+	   
+	   
+	   
 	   
 	   
 	    
@@ -103,15 +129,44 @@ public class EnterGrades extends JFrame {
 	    	public void actionPerformed(ActionEvent e) {
 
 	    		 Vector data = model.getDataVector();			
-					
-//				 for(int i = 0; i < model.getRowCount(); i++) {
-//					 for(int j =0; j< model.getColumnCount(); j++){
-//						System.out.print(((Vector) model.getDataVector().elementAt(i)).elementAt(j) + " ");
-//					 }	
-//					 System.out.println();
-//					 
-//				 } 	
-	    		 
+				String save = "";
+				ArrayList<String> grades = new ArrayList();
+				 for(int i = 0; i < model.getRowCount(); i++) {
+					 for(int j = 1; j< model.getColumnCount(); j++){
+						 save = save + ((Vector) model.getDataVector().elementAt(i)).elementAt(j) + " ";
+					//	System.out.print(((Vector) model.getDataVector().elementAt(i)).elementAt(j) + " ");
+					 }
+					 grades.add(save);
+					 save = "";
+					 	 
+			 } 	
+		String[] gradesList = grades.toArray(new String[0]);
+		
+		try {
+			file.writeGradesToFile(gradesList, nameOfClass, name);
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		
+		for(String a : gradesList ) {
+			System.out.println(a);
+		}
+				 
+	    //write assignmentnames to file		 
+	    		ArrayList<String> assignmentNames = new ArrayList(); 
+	    		for(int i = 1; i < model.getColumnCount(); i ++) {
+	    			
+	    			assignmentNames.add(model.getColumnName(i));
+	    		}
+	    		try {
+					file.writeAssignmentsToClass(assignmentNames, name, nameOfClass);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+	    		
+	    		
 	    		 
 	    	}		
 	    });

@@ -888,4 +888,19 @@ public class FileManager {
 		return nameList;
 	}
 
+	
+	public ArrayList<String> getGradeList(String nameOfClass, String name) throws FileNotFoundException {
+		String userName = getUserNameFromName(name, "teacher");
+		
+		ArrayList<String> gradeList = new ArrayList();
+		
+		File f = new File(PATH_TEACHER + "/" + userName + "/classes/" + nameOfClass + "/Grades.txt");
+		
+		Scanner input = new Scanner(f);
+		
+		while(input.hasNextLine()) {
+			gradeList.add(input.nextLine());
+		}
+		return gradeList;
+	}
 }

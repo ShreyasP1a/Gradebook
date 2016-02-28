@@ -51,12 +51,12 @@ public class EnterGrades extends JFrame {
 		   l++;
 	   }
 	  
-	  
-	  
 	   for(String a : listOfStudents) {
 		   model.addRow(new Object[] {a});
 		   
 	   }
+	   
+	
 	   
 	    
 	    
@@ -91,6 +91,42 @@ public class EnterGrades extends JFrame {
 		e2.printStackTrace();
 	}
 	   
+	   ArrayList<String> gradesLists = new ArrayList();
+		
+		try {
+			gradesLists = file.getGradeList(nameOfClass, name);
+			String[] gradeList = gradesLists.toArray(new String[0]);
+			
+//			String[] wordSplit = new String[model.getColumnCount()-1];
+//			
+//			
+//			wordSplit = gradeList[0].split("\\s+");
+//			
+	System.out.println(model.getColumnCount());
+	System.out.println(model.getRowCount());
+	
+	String[] wordSplit = new String[model.getColumnCount()-1];	
+			for(int i = 0; i < model.getRowCount(); i++) {
+
+				wordSplit = gradeList[i].split("\\s+");
+				int k = 0;
+				for(int j =1; j<model.getColumnCount(); j++) {
+					if(wordSplit[k] == null) {
+						model.setValueAt(0, i, j);
+					}else {
+					model.setValueAt(wordSplit[k], i, j);
+					k++;
+				}
+				}
+				k = 0;
+				
+			}
+		
+			
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		}
 	   
 	   
 	   
@@ -109,7 +145,7 @@ public class EnterGrades extends JFrame {
 	    scrollPane.setAutoscrolls(true);
 	    
 	    JPanel panel = new JPanel();
-	    getContentPane().add(panel, "cell 0 1,alignx center,growy");
+	    getContentPane().add(panel, "flowx,cell 0 1,alignx center,growy");
 	    panel.setLayout(new MigLayout("", "[][]", "[]"));
 	    
 	    JButton btnNewButton = new JButton("Add Grade");
@@ -171,6 +207,14 @@ public class EnterGrades extends JFrame {
 	    	}		
 	    });
 	    panel.add(btnNewButton_1, "cell 1 0");
+	    
+	    JButton btnViewFinalGrades = new JButton("View Final Grades of Students");
+	    btnViewFinalGrades.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent arg0) {
+	    		JOptionPane.showMessageDialog(null, "Shreyas: 30\n Kunal:  40\n Frank: 80\nShravan:  90");
+	    	}
+	    });
+	    getContentPane().add(btnViewFinalGrades, "cell 0 1");
 	    setVisible(true);
 	    setLocationRelativeTo(null);
 	}

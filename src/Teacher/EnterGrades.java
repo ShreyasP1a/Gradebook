@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -102,8 +103,7 @@ public class EnterGrades extends JFrame {
 //			
 //			wordSplit = gradeList[0].split("\\s+");
 //			
-	System.out.println(model.getColumnCount());
-	System.out.println(model.getRowCount());
+	
 	
 	String[] wordSplit = new String[model.getColumnCount()-1];	
 			for(int i = 0; i < model.getRowCount(); i++) {
@@ -211,7 +211,29 @@ public class EnterGrades extends JFrame {
 	    JButton btnViewFinalGrades = new JButton("View Final Grades of Students");
 	    btnViewFinalGrades.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent arg0) {
-	    		JOptionPane.showMessageDialog(null, "Shreyas: 30\n Kunal:  40\n Frank: 80\nShravan:  90");
+	    		Vector data = model.getDataVector();
+	    		int sum = 0;
+	    		double[] sums = new double[model.getColumnCount()-1];
+	    		for(int i = 0; i < model.getRowCount();i++){
+	    			for(int j = 1; j<model.getColumnCount(); j++) {
+	    				sum = sum +  Integer.parseInt((String)model.getValueAt(i, j));
+	    			}
+	    			
+	    			sums[i] = sum;
+	    			sum =0;
+	    		}
+	    		System.out.println();
+	    		System.out.println(sums[0]);
+	    		System.out.println(sums[1]);
+	    		System.out.println(sums[2]);
+	    		
+	    		
+	    		System.out.println(sums[0]/ (model.getColumnCount()-1));
+	    		System.out.println(sums[1]/ (model.getColumnCount()-1));
+	    		System.out.println(sums[2]/ (model.getColumnCount()-1));
+	    		
+	    		
+	    		JOptionPane.showMessageDialog(null,((Vector) model.getDataVector().elementAt(0)).elementAt(0));
 	    	}
 	    });
 	    getContentPane().add(btnViewFinalGrades, "cell 0 1");

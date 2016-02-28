@@ -722,6 +722,7 @@ public class FileManager {
 			
 			Path pathStudentClass = Paths.get(PATH_STUDENT + "/" + userName + "/classes/" + nameOfClass);
 			Path pathStudentClassGrades = Paths.get(PATH_STUDENT + "/" + userName + "/classes/" + nameOfClass+"/grades.txt");
+			Path pathStudentClassAssignments = Paths.get(PATH_STUDENT + "/" + userName + "/classes/" + nameOfClass+"/Assignments.txt");
 			
 			
 			
@@ -729,6 +730,7 @@ public class FileManager {
 				Files.deleteIfExists(pathStudentClass);
 				Files.createDirectories(pathStudentClass);
 				Files.createFile(pathStudentClassGrades);
+				Files.createFile(pathStudentClassAssignments);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				//e.printStackTrace();
@@ -826,7 +828,22 @@ public class FileManager {
 		return listOfStudentsInClass;
 	}
 
-	public void writeAssignmentsToClass(ArrayList<String> nameOfAssignments, String name , String nameOfClass) throws IOException {
+	public void writeAssignmentsToStudent(ArrayList<String> nameOfAssignments, String name , String nameOfClass) throws IOException {
+		
+		String userName = getUserNameFromName(name, "student");
+		Path pathForAssignments = Paths.get(PATH_STUDENT + "/" + userName + "/classes/" + nameOfClass + "/Assignments.txt");
+		
+		File f = pathForAssignments.toFile();
+		
+		if(f.exists()) {
+			f.delete();
+		}
+		final String[] assignmentLists = nameOfAssignments.toArray(new String[0]);
+		f.createNewFile();
+		PrintWriter writer;
+		
+	}
+	public void writeAssignmentsToClassTeacher(ArrayList<String> nameOfAssignments, String name , String nameOfClass) throws IOException {
 		
 		String userName = getUserNameFromName(name, "teacher");
 		Path pathsForAssignments = Paths.get(PATH_TEACHER + "/" + userName + "/classes/" + nameOfClass + "/Assignments.txt");

@@ -196,7 +196,7 @@ public class EnterGrades extends JFrame {
 	    			assignmentNames.add(model.getColumnName(i));
 	    		}
 	    		try {
-					file.writeAssignmentsToClass(assignmentNames, name, nameOfClass);
+					file.writeAssignmentsToClassTeacher(assignmentNames, name, nameOfClass);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -223,17 +223,14 @@ public class EnterGrades extends JFrame {
 	    			sum =0;
 	    		}
 	    		System.out.println();
-	    		System.out.println(sums[0]);
-	    		System.out.println(sums[1]);
-	    		System.out.println(sums[2]);
 	    		
+	    		ArrayList<String> names = new ArrayList();
 	    		
-	    		System.out.println(sums[0]/ (model.getColumnCount()-1));
-	    		System.out.println(sums[1]/ (model.getColumnCount()-1));
-	    		System.out.println(sums[2]/ (model.getColumnCount()-1));
-	    		
-	    		
-	    		JOptionPane.showMessageDialog(null,((Vector) model.getDataVector().elementAt(0)).elementAt(0));
+	    		for(int i = 0;i < model.getRowCount(); i++) {
+	    			names.add((String)model.getValueAt(i, 0));
+	    		}
+ 	    		int columnCount = (model.getColumnCount()-1);
+	    		new ViewFinalGrades(nameOfClass, sums, columnCount, names);
 	    	}
 	    });
 	    getContentPane().add(btnViewFinalGrades, "cell 0 1");

@@ -98,45 +98,33 @@ public class EnterGrades extends JFrame {
 			gradesLists = file.getGradeList(nameOfClass, name);
 			String[] gradeList = gradesLists.toArray(new String[0]);
 			
-//			String[] wordSplit = new String[model.getColumnCount()-1];
-//			
-//			
-//			wordSplit = gradeList[0].split("\\s+");
-//			
-	
-	
-	String[] wordSplit = new String[model.getColumnCount()-1];	
-			for(int i = 0; i < model.getRowCount(); i++) {
 
+	String[] wordSplit = new String[model.getColumnCount()-1];	
+	if(!gradesLists.isEmpty())		{
+		for(int i = 0; i < model.getRowCount(); i++) {
+			
 				wordSplit = gradeList[i].split("\\s+");
+				
 				int k = 0;
-				for(int j =1; j<model.getColumnCount(); j++) {
-					if(wordSplit[k] == null) {
-						model.setValueAt(0, i, j);
-					}else {
+					for(int j =1; j<model.getColumnCount(); j++) {
+						if(wordSplit[k] == null) {
+							model.setValueAt(0, i, j);
+						}else {
 					model.setValueAt(wordSplit[k], i, j);
 					k++;
-				}
+						}
 				}
 				k = 0;
 				
 			}
-		
+	}
 			
 		} catch (FileNotFoundException e3) {
 			// TODO Auto-generated catch block
 			e3.printStackTrace();
 		}
-	   
-	   
-	   
-	   
-	   
-	    
-	   
-	    
-	   
-	    
+		
+
 	    
 	    setSize(1421, 618);
 	    getContentPane().setLayout(new MigLayout("", "[1352px,grow,left]", "[541.00px,grow,top][]"));
@@ -180,6 +168,8 @@ public class EnterGrades extends JFrame {
 		
 		try {
 			file.writeGradesToFile(gradesList, nameOfClass, name);
+			file.writeGradesToFileStudent(gradesList, nameOfClass, name);
+			
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -197,6 +187,7 @@ public class EnterGrades extends JFrame {
 	    		}
 	    		try {
 					file.writeAssignmentsToClassTeacher(assignmentNames, name, nameOfClass);
+					file.writeAssignmentsToStudent(assignmentNames, name, nameOfClass);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -213,10 +204,10 @@ public class EnterGrades extends JFrame {
 	    	public void actionPerformed(ActionEvent arg0) {
 	    		Vector data = model.getDataVector();
 	    		int sum = 0;
-	    		double[] sums = new double[model.getColumnCount()-1];
+	    		double[] sums = new double[model.getRowCount()];
 	    		for(int i = 0; i < model.getRowCount();i++){
-	    			for(int j = 1; j<model.getColumnCount(); j++) {
-	    				sum = sum +  Integer.parseInt((String)model.getValueAt(i, j));
+	    			for(int j = 1; j< model.getColumnCount(); j++) {
+	    				sum = sum + Integer.parseInt((String)model.getValueAt(i, j));
 	    			}
 	    			
 	    			sums[i] = sum;

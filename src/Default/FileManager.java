@@ -179,7 +179,7 @@ public class FileManager {
 
 		// test for check login
 
-		checkLogin("stanton", "test", "CleverFlames");
+		
 
 		// end PreInit
 	}
@@ -830,9 +830,18 @@ public class FileManager {
 
 	public void writeAssignmentsToStudent(ArrayList<String> nameOfAssignments, String name , String nameOfClass) throws IOException {
 		
-		String userName = getUserNameFromName(name, "student");
-		Path pathForAssignments = Paths.get(PATH_STUDENT + "/" + userName + "/classes/" + nameOfClass + "/Assignments.txt");
 		
+		
+		ArrayList<String> listOfStudents = getListOfStudentsInClassForTeacher(nameOfClass, name);
+		
+		String[] studentList = listOfStudents.toArray(new String[0]);
+		
+		
+		for(String a : studentList) {
+			
+		
+		Path pathForAssignments = Paths.get(PATH_STUDENT + "/" + a + "/classes/" + nameOfClass + "/Assignments.txt");
+		System.out.println(pathForAssignments);
 		File f = pathForAssignments.toFile();
 		
 		if(f.exists()) {
@@ -841,7 +850,13 @@ public class FileManager {
 		final String[] assignmentLists = nameOfAssignments.toArray(new String[0]);
 		f.createNewFile();
 		PrintWriter writer;
-		
+		writer = new PrintWriter(f,"UTF-8");
+				for(String b : assignmentLists) {
+					writer.print(b);
+					writer.println();
+				}
+				writer.close();	
+		}
 	}
 	public void writeAssignmentsToClassTeacher(ArrayList<String> nameOfAssignments, String name , String nameOfClass) throws IOException {
 		
@@ -872,7 +887,9 @@ public class FileManager {
 		Path pathsForGrades = Paths.get(PATH_TEACHER + "/" + userName + "/classes/" + nameOfClass + "/Grades.txt");
 		
 		File f = pathsForGrades.toFile();
-		
+		if(f.exists()) {
+			f.delete();
+		}
 		f.createNewFile();
 		
 		PrintWriter writer;
@@ -884,11 +901,35 @@ public class FileManager {
 			writer.println();
 		}
 		writer.close();		
+			
+	}
+	
+	public void writeGradesToFileStudent(String[] grades, String nameOfClass, String name) throws IOException{
 		
+		ArrayList<String> listOfStudents = getListOfStudentsInClassForTeacher(nameOfClass, name);
 		
+		String[] studentList = listOfStudents.toArray(new String[0]);
 		
+		int l = 0;
+		for(String a : studentList) {
 		
+		Path pathForGrades = Paths.get(PATH_STUDENT + "/" + a + "/classes/" + nameOfClass + "/Grades.txt");
 		
+		File f = pathForGrades.toFile();
+		
+		if(f.exists()) {
+			f.delete();
+		}
+		f.createNewFile();
+		
+		PrintWriter writer;
+		writer = new PrintWriter(f,"UTF-8");
+			writer.print(grades[l]);				
+		
+		writer.close();
+		l++;
+		}		
+			
 	}
 	
 	public ArrayList<String> getAssignmentList(String nameOfClass, String name) throws FileNotFoundException {

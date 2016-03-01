@@ -56,7 +56,7 @@ public class ViewFinalGrades extends JFrame {
 		String pattern = "###,###.#";
 		DecimalFormat df = new DecimalFormat(pattern);
 		for(double a : grades){
-			finalGrades[l] = grades[l]/columnCount;
+			finalGrades[l] = grades[l]/(columnCount);
 			l++;
 		}
 		int m = 0;

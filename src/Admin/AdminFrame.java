@@ -74,6 +74,7 @@ public class AdminFrame extends JFrame {
 		contentPane.add(btnSechduleApExams);
 		
 		JButton button = new JButton("Account Settings");
+		button.setVisible(false);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new AccountSettingsFrame();

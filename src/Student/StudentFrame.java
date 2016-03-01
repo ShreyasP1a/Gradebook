@@ -65,6 +65,7 @@ public class StudentFrame extends JFrame {
 		contentPane.add(btnCheckYourAp);
 		
 		JButton btnAccountSettings = new JButton("Account Settings");
+		btnAccountSettings.setVisible(false);
 		btnAccountSettings.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new AccountSettingsFrame();

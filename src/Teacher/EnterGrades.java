@@ -4,16 +4,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import Default.FileManager;
@@ -29,12 +30,16 @@ public class EnterGrades extends JFrame {
 	 * Create the frame.
 	 */
 	public EnterGrades(String nameOfClass, String name) {
-		
+		JOptionPane.showMessageDialog(null, "Remember to click save when you are done otherwise it will not save! Thank you");
 		FileManager file = new FileManager();
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		DefaultTableModel model = new DefaultTableModel();
 	    JTable table = new JTable(model);
-	    table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+	    table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+	    
+	    DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+	    centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+	    table.setDefaultRenderer(String.class, centerRenderer);
 	    
 	  
 	    model.addColumn("Students");
@@ -224,6 +229,8 @@ public class EnterGrades extends JFrame {
 	    		new ViewFinalGrades(nameOfClass, sums, columnCount, names);
 	    	}
 	    });
+	    
+	    
 	    getContentPane().add(btnViewFinalGrades, "cell 0 1");
 	    setVisible(true);
 	    setLocationRelativeTo(null);

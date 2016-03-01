@@ -57,14 +57,15 @@ public class TeacherFrame extends JFrame {
 		btnAllTeachers.setBounds(10, 172, 253, 23);
 		contentPane.add(btnAllTeachers);
 		
-		JButton btnSechduleApExams = new JButton("Account Settings");
-		btnSechduleApExams.addActionListener(new ActionListener() {
+		JButton button = new JButton("Account Settings");
+		button.setVisible(false);
+		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new AccountSettingsFrame();
 			}
 		});
-		btnSechduleApExams.setBounds(10, 228, 263, 23);
-		contentPane.add(btnSechduleApExams);
+		button.setBounds(10, 228, 263, 23);
+		contentPane.add(button);
 		setVisible(true);
 		setLocationRelativeTo(null);
 	}

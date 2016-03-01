@@ -961,4 +961,42 @@ public class FileManager {
 		}
 		return gradeList;
 	}
+
+	public ArrayList<String> getAssignmentListForStudent(String nameOfClass, String name) throws FileNotFoundException {
+		String userName = getUserNameFromName(name, "student");
+		ArrayList<String> nameList = new ArrayList();
+		
+		File f = new File(PATH_STUDENT + "/" + userName + "/classes/" + nameOfClass + "/Assignments.txt");
+		
+		Scanner input = new Scanner(f);
+		
+		while(input.hasNextLine()) {
+			nameList.add(input.nextLine());
+		}
+		return nameList;
+		
+	}
+	
+
+	public ArrayList<String> getGradeListForStudent(String nameOfClass, String name) throws FileNotFoundException {
+		String userName = getUserNameFromName(name, "student");
+		
+		ArrayList<String> gradeList = new ArrayList();
+		
+		File f = new File(PATH_STUDENT + "/" + userName + "/classes/" + nameOfClass + "/Grades.txt");
+		
+		Scanner input = new Scanner(f);
+		
+		while(input.hasNextLine()) {
+			gradeList.add(input.nextLine());
+		}
+		String[] gradesList = gradeList.toArray(new String[0]);
+		String[] wordSplit = gradesList[0].split("\\s+");
+		gradeList.clear();
+		
+		for(String a : wordSplit) {
+			gradeList.add(a);
+		}
+		return gradeList;	
+	}
 }

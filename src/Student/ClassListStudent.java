@@ -13,14 +13,14 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import Default.FileManager;
-
-public class ClassListStudent extends JFrame {
+  class ClassListStudent extends JFrame {
 
 	private DefaultListModel listModel;
 	private FileManager file = new FileManager();
@@ -68,7 +68,16 @@ public class ClassListStudent extends JFrame {
 		contentPane.add(btnCancel);
 		
 		JButton btnCheckGradeFor = new JButton("Check grade for class");
-		btnCheckGradeFor.setBounds(240, 412, 135, 23);
+		btnCheckGradeFor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(list.isSelectionEmpty()) {
+					JOptionPane.showMessageDialog(null, "Please select a class!");
+				} else {
+					new ViewGradeFrame((String)listModel.getElementAt(list.getSelectedIndex()), name);
+				}
+			}
+		});
+		btnCheckGradeFor.setBounds(214, 412, 161, 23);
 		contentPane.add(btnCheckGradeFor);
 		setVisible(true);
 		setLocationRelativeTo(null);

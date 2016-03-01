@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
@@ -75,11 +76,16 @@ public class AP extends JFrame {
 		JButton btnPickAp = new JButton("Pick AP");
 		btnPickAp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(selectedValuesList.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Please select at least one ap, Remeber you can hold ctrl to select more than one value!");
+				} else{
+				
 					dispose();
 					String userName = file.getUserNameFromName(name, "student");
 					file.writeApExamsToPerson(userName, selectedValuesList);
 				
-			}
+					}
+				}
 		});
 		btnPickAp.setBounds(298, 412, 89, 23);
 		contentPane.add(btnPickAp);

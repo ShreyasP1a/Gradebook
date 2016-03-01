@@ -1,10 +1,12 @@
  package Default;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
@@ -16,8 +18,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
-
-import Admin.StudentLists;
 
 public class FileManager {
 	/*
@@ -529,7 +529,10 @@ public class FileManager {
 
 	// returns the arraylist of all of the ap classes from the aplist.txt
 	public ArrayList<String> getAllAPClass() {
-
+		BufferedReader br = new BufferedReader(new InputStreamReader(
+                ClassLoader.getSystemClassLoader().getResourceAsStream("APLIST/APLIST.txt")));
+		
+				
 		ArrayList<String> apList = new ArrayList<String>();
 
 		try {
@@ -692,10 +695,8 @@ public class FileManager {
 			return apList;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return apList;
 		}
-
-		return apList;
 	}
 
 	// This method will create the class and add it to the teacher folder and

@@ -20,13 +20,13 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import Default.FileManager;
-  class ClassListStudent extends JFrame {
+
+public class ClassListStudent extends JFrame {
 
 	private DefaultListModel listModel;
 	private FileManager file = new FileManager();
 	private JPanel contentPane;
 
-	
 	public ClassListStudent(String name) {
 		setBounds(100, 100, 401, 487);
 		setLocationRelativeTo(null);
@@ -47,33 +47,32 @@ import Default.FileManager;
 		listModel = new DefaultListModel();
 
 		ArrayList<String> namesOfClass = file.getClassListForStudent(name);
-		
+
 		final String[] classList = namesOfClass.toArray(new String[0]);
-		
-		for(String a : classList) {
+
+		for (String a : classList) {
 			listModel.addElement(a);
 		}
 
 		final JList list = new JList(listModel);
 		scrollPane.setViewportView(list);
-	
-		
+
 		JButton btnCancel = new JButton("Close");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					dispose();
+				dispose();
 			}
 		});
 		btnCancel.setBounds(10, 412, 89, 23);
 		contentPane.add(btnCancel);
-		
+
 		JButton btnCheckGradeFor = new JButton("Check grade for class");
 		btnCheckGradeFor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(list.isSelectionEmpty()) {
+				if (list.isSelectionEmpty()) {
 					JOptionPane.showMessageDialog(null, "Please select a class!");
 				} else {
-					new ViewGradeFrame((String)listModel.getElementAt(list.getSelectedIndex()), name);
+					new ViewGradeFrame((String) listModel.getElementAt(list.getSelectedIndex()), name);
 				}
 			}
 		});
@@ -81,7 +80,6 @@ import Default.FileManager;
 		contentPane.add(btnCheckGradeFor);
 		setVisible(true);
 		setLocationRelativeTo(null);
-		
-		
+
 	}
 }

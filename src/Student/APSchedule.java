@@ -24,6 +24,11 @@ public class APSchedule extends JFrame {
 	private JPanel contentPane;
 
 	public APSchedule(String userName) {
+		ArrayList<String> apList = new ArrayList();
+		
+		apList = file.getApList(userName);
+		
+		
 
 		setBounds(100, 100, 401, 487);
 		setLocationRelativeTo(null);
@@ -42,12 +47,16 @@ public class APSchedule extends JFrame {
 		contentPane.add(scrollPane);
 
 		listModel = new DefaultListModel();
+		if(apList.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "You do not have any ap exams scheduled!");
+			dispose();
+			
+		}
 
 
 		
-		ArrayList<String> apList = new ArrayList();
 		
-		apList = file.getApList(userName);
+		
 		final String[] apLists = apList.toArray(new String[0]);
 		
 		for(String a : apLists) {

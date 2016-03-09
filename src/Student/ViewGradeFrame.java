@@ -47,6 +47,7 @@ public class ViewGradeFrame extends JFrame {
 		
 		for(String a : listOfAssignments) {
 			   model.addRow(new Object[] {a});  
+			   model.setValueAt("shreayas", 0, 1);
 		   }
 	} catch (FileNotFoundException e) {
 		// TODO Auto-generated catch block

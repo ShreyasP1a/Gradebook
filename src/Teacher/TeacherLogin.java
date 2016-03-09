@@ -61,6 +61,13 @@ public class TeacherLogin extends JFrame {
 		panel.add(userNameTxt);
 		
 		JButton button = new JButton("Cancel");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
+		
+		
 		button.setBounds(20, 253, 89, 23);
 		panel.add(button);
 		

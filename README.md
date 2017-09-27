@@ -15,6 +15,6 @@ Students can look at their grades, and look at the list of Ap's that they are go
 
 In order to run it, (I will make this better) pull the src off the github repository, and import it into eclipse, and then run it
 
-It should only run on eclipse, as a saftey precaution all the files are stored in the %appdata% so it is not easy for students to access it without
+As a safety precaution all the files are stored in the %appdata% so it is not easy for students to access it without
 prior knowledge of where the files are stored.
 
